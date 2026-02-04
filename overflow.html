@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>overflow‑wrap, word‑break & white‑space – live demos</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <div class="container">
+
+<h1>overflow‑wrap, word‑break & white‑space – live demos</h1>
+
+<!-- ------------- OVERFLOW‑WRAP ------------- -->
+<section class="overflow-demo over-wrap-normal">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M2 7v14h20V7H2zm14 4h-6v2h6v-2z"/></svg>
+    overflow-wrap: normal
+  </h2>
+  <p>
+    <span class="long-word">Supercalifragilisticexpialidocious</span> will stay on one line until no other
+    break is possible.  The word is only split when the line ends and
+    no space can fit.
+  </p>
+</section>
+
+<section class="overflow-demo over-wrap-break">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M2 7v14h20V7H2zm14 4h-6v2h6v-2z"/></svg>
+    overflow-wrap: break‑word
+  </h2>
+  <p>
+    <span class="long-word">Supercalifragilisticexpialidocious</span> now breaks in the middle of the
+    word so that every line fits the container width.
+  </p>
+</section>
+
+<!-- ------------- WORD‑BREAK ------------- -->
+<section class="overflow-demo word-break-keep">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M2 17v2h20v-2H2zm4-10h12v-2H6v2z"/></svg>
+    word-break: keep‑all
+  </h2>
+  <p>
+    <span class="long-word">Supercalifragilisticexpialidocious</span> will not be broken unless a normal
+    space appears.  Useful for CJK scripts that want to avoid intra‑word
+    hyphenation.
+  </p>
+</section>
+
+<section class="overflow-demo word-break-all">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M2 17v2h20v-2H2zm4-10h12v-2H6v2z"/></svg>
+    word-break: break‑all
+  </h2>
+  <p>
+    <span class="long-word">Supercalifragilisticexpialidocious</span> may be split at any
+    character, giving the most aggressive line‑breaking behaviour.
+  </p>
+</section>
+
+<section class="overflow-demo word-break-word">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M2 17v2h20v-2H2zm4-10h12v-2H6v2z"/></svg>
+    word-break: break‑word
+  </h2>
+  <p>
+    <span class="long-word">Supercalifragilisticexpialidocious</span> forces a break only when the word
+    itself overflows the line, similar to <code>overflow-wrap: break‑word</code>.
+  </p>
+</section>
+
+<!-- ------------- WHITE‑SPACE ------------- -->
+<section class="overflow-demo whitespace-normal">
+  <h2>
+    <!-- ⬜ – baseline icon for white‑space -->
+    <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm3 6h12v2H6v-2zm-3 6h18v2H3v-2z"/></svg>
+    white‑space: normal
+  </h2>
+  <p>
+    The default setting collapses multiple spaces, removes leading
+    & trailing whitespace, and ignores line‑break characters in the
+    source.  The <code>Supercalifragilisticexpialidocious</code> word
+    still behaves like in the previous examples because the wrapping
+    decision is governed by <code>overflow-wrap</code>.
+  </p>
+</section>
+
+<section class="overflow-demo whitespace-nowrap">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm3 6h12v2H6v-2zm-3 6h18v2H3v-2z"/></svg>
+    white‑space: nowrap
+  </h2>
+  <p class="nowrap">
+    <span class="long-word">Supercalifragilisticexpialidocious</span> will stay on one line – the browser
+    simply refuses to break the line even when it overflows the
+    viewport.  A horizontal scrollbar appears if the line is too long.
+  </p>
+</section>
+
+<section class="overflow-demo whitespace-pre">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm3 6h12v2H6v-2zm-3 6h18v2H3v-2z"/></svg>
+    white‑space: pre
+  </h2>
+  <pre class="pre">
+This  paragraph      preserves   all   whitespace and
+    new‑lines exactly as written in the source text.
+  </pre>
+</section>
+
+<section class="overflow-demo whitespace-pre-wrap">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm3 6h12v2H6v-2zm-3 6h18v2H3v-2z"/></svg>
+    white‑space: pre‑wrap
+  </h2>
+  <p class="pre-wrap">
+    <span class="long-word">Supercalifragilisticexpialidocious</span> keeps the source whitespace
+    and line‑breaks, but it will also wrap long words when they
+    exceed the container width.
+  </p>
+</section>
+
+<section class="overflow-demo whitespace-pre-line">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm3 6h12v2H6v-2zm-3 6h18v2H3v-2z"/></svg>
+    white‑space: pre‑line
+  </h2>
+  <p class="pre-line">
+    This example keeps new‑lines from the source, collapses consecutive
+    spaces to a single one, and still allows normal word wrapping.
+  </p>
+</section>
+
+<section class="overflow-demo whitespace-break-spaces">
+  <h2>
+    <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm3 6h12v2H6v-2zm-3 6h18v2H3v-2z"/></svg>
+    white‑space: break‑spaces
+  </h2>
+  <p class="break-spaces">
+    In this mode every space, including trailing ones, is treated as a
+    potential line‑break point.  The Dezember‑long‑word is still
+    wrapped, but you can now see that the very last space in the line
+    becomes a valid break.
+  </p>
+</section>
+</div>
+
+<footer>
+  <p>All code snippets use the <code>Supercalifragilisticexpialidocious</code> word to illustrate the
+    different line‑breaking behaviours under each CSS property.  Try
+    resizing the window or scrolling horizontally to see how the
+    <code>white‑space: nowrap</code> example changes.</p>
+</footer>
+
+</body>
+</html>

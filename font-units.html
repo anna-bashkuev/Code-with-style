@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Units Decision Tree</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 CSS Units Decision Tree</h1>
+
+        <div class="tree-container">
+            <!-- Section 1: Font Sizing -->
+            <div class="tree-section">
+                <h2><span class="tree-icon">🔤</span> Need to size font?</h2>
+
+                <div class="tree-item">
+                    <span class="item-label">Fixed size</span>
+                    <span class="item-value">px</span>
+                    <div class="item-description">(icons only)</div>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Consistent across document</span>
+                    <span class="item-value">rem</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Relative to parent</span>
+                    <span class="item-value">em</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Responsive to viewport</span>
+                    <span class="item-value">clamp() + vw</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Responsive to container</span>
+                    <span class="item-value">clamp() + cqw/cqi</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">CJK text</span>
+                    <span class="item-value">ic</span>
+                    <span class="item-value">ric</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Print</span>
+                    <span class="item-value">pt</span>
+                </div>
+            </div>
+
+            <!-- Section 2: Width/Height -->
+            <div class="tree-section section-2">
+                <h2><span class="tree-icon">📏</span> Need to set width/height?</h2>
+
+                <div class="tree-item">
+                    <span class="item-label">Based on characters</span>
+                    <span class="item-value">ch</span>
+                    <span class="item-value">rch</span>
+                    <div class="item-description">(max-width)</div>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Based on viewport</span>
+                    <span class="item-value">vw/vh</span>
+                    <span class="item-value">dvw/dvh</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Based on container</span>
+                    <span class="item-value">cqw/cqi</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Grid proportions</span>
+                    <span class="item-value">fr</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">Percentage of parent</span>
+                    <span class="item-value">%</span>
+                </div>
+            </div>
+
+            <!-- Section 3: Alignment -->
+            <div class="tree-section section-3">
+                <h2><span class="tree-icon">🎯</span> Need precise alignment?</h2>
+
+                <div class="tree-item">
+                    <span class="item-label">To capital letters</span>
+                    <span class="item-value">cap</span>
+                    <span class="item-value">rcap</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">To x-height</span>
+                    <span class="item-value">ex</span>
+                    <span class="item-value">rex</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">To line-height</span>
+                    <span class="item-value">lh</span>
+                    <span class="item-value">rlh</span>
+                </div>
+
+                <div class="tree-item">
+                    <span class="item-label">To ideographic width</span>
+                    <span class="item-value">ic</span>
+                    <span class="item-value">ric</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="edit-hint">💡 Click any text to edit</div>
+
+    <script>
+        // Enable contenteditable on hover for easier editing
+        document.querySelectorAll('.item-label, .item-value, .item-description, h2').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.contentEditable = 'true';
+                this.focus();
+            });
+
+            el.addEventListener('blur', function() {
+                this.contentEditable = 'false';
+            });
+
+            el.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    this.blur();
+                }
+            });
+        });
+
+        // Prevent accidental editing of structural elements
+        document.addEventListener('click', function(e) {
+            document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+                if (!el.contains(e.target)) {
+                    el.blur();
+                }
+            });
+        });
+
+        console.log('%c✨ CSS Units Decision Tree', 'color: #667eea; font-size: 16px; font-weight: bold;');
+        console.log('%cClick any text to edit it directly!', 'color: #999; font-size: 12px;');
+    </script>
+</body>
+</html>

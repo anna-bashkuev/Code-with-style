@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Font-Size Units Reference</title>
+   <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 CSS Font-Size Units Reference</h1>
+        <p class="subtitle">Complete guide to all CSS units for font sizing</p>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search units (e.g., 'rem', 'viewport', 'font')...">
+            <p class="filter-info" id="filterInfo"></p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="all">📋 All Units</button>
+            <button class="tab-button" data-tab="absolute">🔒 Absolute</button>
+            <button class="tab-button" data-tab="font-relative">🔤 Font-Relative</button>
+            <button class="tab-button" data-tab="root-relative">👑 Root-Relative</button>
+            <button class="tab-button" data-tab="viewport">📱 Viewport</button>
+            <button class="tab-button" data-tab="container">📦 Container Query</button>
+            <button class="tab-button" data-tab="functions">🔧 Functions</button>
+        </div>
+
+        <!-- ALL UNITS TAB -->
+        <div id="all" class="tab-content active">
+            <div class="table-wrapper">
+                <table id="allTable">
+                    <thead>
+                        <tr>
+                            <th>Unit</th>
+                            <th>Name</th>
+                            <th>Value / Formula</th>
+                            <th>Best For</th>
+                            <th>Example</th>
+                            <th>Browser Support</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="allTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ABSOLUTE UNITS TAB -->
+        <div id="absolute" class="tab-content">
+            <div class="table-wrapper">
+                <table class="section-absolute">
+                    <thead>
+                        <tr>
+                            <th>Unit</th>
+                            <th>Name</th>
+                            <th>Value</th>
+                            <th>Best For</th>
+                            <th>Example</th>
+                            <th>Browser Support</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="unit-badge">px</span></td>
+                            <td>Pixel</td>
+                            <td>1/96th inch</td>
+                            <td>Icons, borders, precise layouts</td>
+                            <td><span class="example">font-size: 16px;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">pt</span></td>
+                            <td>Point</td>
+                            <td>1/72 inch</td>
+                            <td>Print stylesheets, PDFs</td>
+                            <td><span class="example">@media print { 12pt; }</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">pc</span></td>
+                            <td>Pica</td>
+                            <td>12 points</td>
+                            <td>Print, rarely used</td>
+                            <td><span class="example">margin: 1pc;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">cm</span></td>
+                            <td>Centimeter</td>
+                            <td>Physical measurement</td>
+                            <td>Print only</td>
+                            <td><span class="example">@media print { 2cm; }</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">mm</span></td>
+                            <td>Millimeter</td>
+                            <td>Physical measurement</td>
+                            <td>Print only</td>
+                            <td><span class="example">border: 1mm solid;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">in</span></td>
+                            <td>Inch</td>
+                            <td>Physical measurement</td>
+                            <td>Print only</td>
+                            <td><span class="example">@media print { 8.5in; }</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">Q</span></td>
+                            <td>Quarter-mm</td>
+                            <td>0.25mm</td>
+                            <td>Print, fine control</td>
+                            <td><span class="example">border-width: 8Q;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 63+">C</span><span class="browser-icon supported" title="Firefox: 49+">F</span><span class="browser-icon supported" title="Safari: 13+">S</span><span class="browser-icon supported" title="Edge: 79+">E</span></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- FONT-RELATIVE UNITS TAB -->
+        <div id="font-relative" class="tab-content">
+            <div class="table-wrapper">
+                <table class="section-font-relative">
+                    <thead>
+                        <tr>
+                            <th>Unit</th>
+                            <th>Name</th>
+                            <th>Relative To</th>
+                            <th>Best For</th>
+                            <th>Example</th>
+                            <th>Browser Support</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="unit-badge">em</span></td>
+                            <td>Em</td>
+                            <td>Parent's font-size</td>
+                            <td>Component scaling</td>
+                            <td><span class="example">padding: 2em;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">%</span></td>
+                            <td>Percent</td>
+                            <td>Parent's font-size</td>
+                            <td>Proportional sizing</td>
+                            <td><span class="example">font-size: 150%;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">ex</span></td>
+                            <td>X-height</td>
+                            <td>Lowercase "x" height</td>
+                            <td>Fine alignment (rare)</td>
+                            <td><span class="example">height: 2ex;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">ch</span></td>
+                            <td>Character width</td>
+                            <td>Width of "0" zero</td>
+                            <td>Optimal line length</td>
+                            <td><span class="example">max-width: 65ch;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">cap</span></td>
+                            <td>Cap height</td>
+                            <td>Capital letter height</td>
+                            <td>Icon alignment</td>
+                            <td><span class="example">height: 2cap;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 89+">C</span><span class="browser-icon partial" title="Firefox: Limited">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 89+">E</span></div></td>
+                            <td><span class="status-badge status-modern">Modern</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">ic</span></td>
+                            <td>Ideographic</td>
+                            <td>Width of CJK "水"</td>
+                            <td>CJK text sizing</td>
+                            <td><span class="example">font-size: 1.5ic;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 89+">C</span><span class="browser-icon partial" title="Firefox: Limited">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 89+">E</span></div></td>
+                            <td><span class="status-badge status-modern">Modern</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">lh</span></td>
+                            <td>Line-height</td>
+                            <td>Element's line-height</td>
+                            <td>Vertical rhythm</td>
+                            <td><span class="example">margin: 1.5lh;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 89+">C</span><span class="browser-icon partial" title="Firefox: Limited">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 89+">E</span></div></td>
+                            <td><span class="status-badge status-modern">Modern</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ROOT-RELATIVE UNITS TAB -->
+        <div id="root-relative" class="tab-content">
+            <div class="table-wrapper">
+                <table class="section-root-relative">
+                    <thead>
+                        <tr>
+                            <th>Unit</th>
+                            <th>Name</th>
+                            <th>Relative To</th>
+                            <th>Best For</th>
+                            <th>Example</th>
+                            <th>Browser Support</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="unit-badge">rem</span></td>
+                            <td>Root em</td>
+                            <td>Root's font-size</td>
+                            <td>Global consistency</td>
+                            <td><span class="example">font-size: 1rem;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">rex</span></td>
+                            <td>Root x-height</td>
+                            <td>Root's x-height</td>
+                            <td>Root alignment</td>
+                            <td><span class="example">margin: 1.5rex;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 111+">C</span><span class="browser-icon partial" title="Firefox: Limited">F</span><span class="browser-icon supported" title="Safari: 17.4+">S</span><span class="browser-icon supported" title="Edge: 111+">E</span></div></td>
+                            <td><span class="status-badge status-new">🆕 New</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">rch</span></td>
+                            <td>Root character width</td>
+                            <td>Root's "0" zero</td>
+                            <td>Consistent line limits</td>
+                            <td><span class="example">max-width: 70rch;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 111+">C</span><span class="browser-icon partial" title="Firefox: Limited">F</span><span class="browser-icon supported" title="Safari: 17.4+">S</span><span class="browser-icon supported" title="Edge: 111+">E</span></div></td>
+                            <td><span class="status-badge status-new">🆕 New</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">rcap</span></td>
+                            <td>Root cap height</td>
+                            <td>Root's capital height</td>
+                            <td>Root icon alignment</td>
+                            <td><span class="example">height: 2rcap;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 111+">C</span><span class="browser-icon partial" title="Firefox: Limited">F</span><span class="browser-icon supported" title="Safari: 17.4+">S</span><span class="browser-icon supported" title="Edge: 111+">E</span></div></td>
+                            <td><span class="status-badge status-new">🆕 New</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">ric</span></td>
+                            <td>Root ideographic</td>
+                            <td>Root's CJK "水"</td>
+                            <td>Root CJK sizing</td>
+                            <td><span class="example">padding: 1ric;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 111+">C</span><span class="browser-icon partial" title="Firefox: Limited">F</span><span class="browser-icon supported" title="Safari: 17.4+">S</span><span class="browser-icon supported" title="Edge: 111+">E</span></div></td>
+                            <td><span class="status-badge status-new">🆕 New</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">rlh</span></td>
+                            <td>Root line-height</td>
+                            <td>Root's line-height</td>
+                            <td>Document vertical rhythm</td>
+                            <td><span class="example">margin: 1rlh;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 89+">C</span><span class="browser-icon partial" title="Firefox: Limited">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 89+">E</span></div></td>
+                            <td><span class="status-badge status-new">🆕 New</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- VIEWPORT UNITS TAB -->
+        <div id="viewport" class="tab-content">
+            <div class="table-wrapper">
+                <table class="section-viewport">
+                    <thead>
+                        <tr>
+                            <th>Unit</th>
+                            <th>Name</th>
+                            <th>Formula</th>
+                            <th>Best For</th>
+                            <th>Example</th>
+                            <th>Browser Support</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="unit-badge">vw</span></td>
+                            <td>Viewport width</td>
+                            <td>1% of viewport width</td>
+                            <td>Responsive headings</td>
+                            <td><span class="example">font-size: 4vw;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 26+">C</span><span class="browser-icon supported" title="Firefox: 19+">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td>Use clamp() to limit</td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">vh</span></td>
+                            <td>Viewport height</td>
+                            <td>1% of viewport height</td>
+                            <td>Full-screen sections</td>
+                            <td><span class="example">height: 100vh;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 19+">C</span><span class="browser-icon supported" title="Firefox: 19+">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td>Mobile address bar issue</td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">vmin</span></td>
+                            <td>Viewport min</td>
+                            <td>1% of smaller dimension</td>
+                            <td>Safe responsive sizing</td>
+                            <td><span class="example">font-size: 4vmin;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td>Good for mobile</td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">vmax</span></td>
+                            <td>Viewport max</td>
+                            <td>1% of larger dimension</td>
+                            <td>Scaling with largest</td>
+                            <td><span class="example">font-size: 4vmax;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: All">C</span><span class="browser-icon supported" title="Firefox: All">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td>Less common</td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">vi</span></td>
+                            <td>Viewport inline</td>
+                            <td>1% of inline axis</td>
+                            <td>Horizontal in normal mode</td>
+                            <td><span class="example">width: 50vi;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: Modern">C</span><span class="browser-icon supported" title="Firefox: Modern">F</span><span class="browser-icon supported" title="Safari: Modern">S</span><span class="browser-icon supported" title="Edge: Modern">E</span></div></td>
+                            <td>Writing-mode aware</td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">vb</span></td>
+                            <td>Viewport block</td>
+                            <td>1% of block axis</td>
+                            <td>Vertical in normal mode</td>
+                            <td><span class="example">height: 50vb;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: Modern">C</span><span class="browser-icon supported" title="Firefox: Modern">F</span><span class="browser-icon supported" title="Safari: Modern">S</span><span class="browser-icon supported" title="Edge: Modern">E</span></div></td>
+                            <td>Writing-mode aware</td>
+                        </tr>
+                        <tr style="background: #fffbea; font-weight: 600;">
+                            <td colspan="7" style="padding: 12px; text-align: center; color: #e65100;">⭐ Dynamic Viewport Units (2023+) - Mobile-Friendly</td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">svw, svh</span></td>
+                            <td>Small viewport</td>
+                            <td>Account for browser UI (hidden)</td>
+                            <td>Mobile apps with UI</td>
+                            <td><span class="example">height: 100svh;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 108+">C</span><span class="browser-icon supported" title="Firefox: 101+">F</span><span class="browser-icon supported" title="Safari: 15.4+">S</span><span class="browser-icon supported" title="Edge: 108+">E</span></div></td>
+                            <td>Browser UI hidden</td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">lvw, lvh</span></td>
+                            <td>Large viewport</td>
+                            <td>Account for browser UI (visible)</td>
+                            <td>Desktop layouts</td>
+                            <td><span class="example">height: 100lvh;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 108+">C</span><span class="browser-icon supported" title="Firefox: 101+">F</span><span class="browser-icon supported" title="Safari: 15.4+">S</span><span class="browser-icon supported" title="Edge: 108+">E</span></div></td>
+                            <td>Browser UI visible</td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">dvw, dvh</span></td>
+                            <td>Dynamic viewport</td>
+                            <td>Changes with UI visibility</td>
+                            <td>Responsive to UI changes</td>
+                            <td><span class="example">height: 100dvh;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 108+">C</span><span class="browser-icon supported" title="Firefox: 101+">F</span><span class="browser-icon supported" title="Safari: 15.4+">S</span><span class="browser-icon supported" title="Edge: 108+">E</span></div></td>
+                            <td>✅ Best for mobile</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CONTAINER QUERY UNITS TAB -->
+        <div id="container" class="tab-content">
+            <div class="table-wrapper">
+                <table class="section-container">
+                    <thead>
+                        <tr>
+                            <th>Unit</th>
+                            <th>Name</th>
+                            <th>Relative To</th>
+                            <th>Best For</th>
+                            <th>Example</th>
+                            <th>Browser Support</th>
+                            <th>Requires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="unit-badge">cqw</span></td>
+                            <td>Container width</td>
+                            <td>1% of container width</td>
+                            <td>Width-based scaling</td>
+                            <td><span class="example">font-size: 5cqw;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 105+">C</span><span class="browser-icon supported" title="Firefox: 120+">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 105+">E</span></div></td>
+                            <td><span class="value-mono">container-type</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">cqh</span></td>
+                            <td>Container height</td>
+                            <td>1% of container height</td>
+                            <td>Height-based scaling</td>
+                            <td><span class="example">font-size: 4cqh;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 105+">C</span><span class="browser-icon supported" title="Firefox: 120+">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 105+">E</span></div></td>
+                            <td><span class="value-mono">container-type</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">cqi</span></td>
+                            <td>Container inline</td>
+                            <td>1% of inline size</td>
+                            <td>Horizontal scaling</td>
+                            <td><span class="example">font-size: 5cqi;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 105+">C</span><span class="browser-icon supported" title="Firefox: 120+">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 105+">E</span></div></td>
+                            <td><span class="value-mono">container-type</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">cqb</span></td>
+                            <td>Container block</td>
+                            <td>1% of block size</td>
+                            <td>Vertical scaling</td>
+                            <td><span class="example">font-size: 4cqb;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 105+">C</span><span class="browser-icon supported" title="Firefox: 120+">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 105+">E</span></div></td>
+                            <td><span class="value-mono">container-type</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">cqmin</span></td>
+                            <td>Container min</td>
+                            <td>Min of cqi/cqb</td>
+                            <td>Proportional scaling</td>
+                            <td><span class="example">padding: 2cqmin;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 105+">C</span><span class="browser-icon supported" title="Firefox: 120+">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 105+">E</span></div></td>
+                            <td><span class="value-mono">container-type</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">cqmax</span></td>
+                            <td>Container max</td>
+                            <td>Max of cqi/cqb</td>
+                            <td>Proportional scaling</td>
+                            <td><span class="example">border-radius: 1cqmax;</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 105+">C</span><span class="browser-icon supported" title="Firefox: 120+">F</span><span class="browser-icon supported" title="Safari: 16.4+">S</span><span class="browser-icon supported" title="Edge: 105+">E</span></div></td>
+                            <td><span class="value-mono">container-type</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- FUNCTIONS TAB -->
+        <div id="functions" class="tab-content">
+            <div class="table-wrapper">
+                <table class="section-functions">
+                    <thead>
+                        <tr>
+                            <th>Function</th>
+                            <th>Syntax</th>
+                            <th>Purpose</th>
+                            <th>Example</th>
+                            <th>Browser Support</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="unit-badge">clamp()</span></td>
+                            <td><span class="value-mono">clamp(min, preferred, max)</span></td>
+                            <td>Responsive with bounds</td>
+                            <td><span class="example">font-size: clamp(1rem, 2vw, 3rem);</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 79+">C</span><span class="browser-icon supported" title="Firefox: 75+">F</span><span class="browser-icon supported" title="Safari: 11.1+">S</span><span class="browser-icon supported" title="Edge: 79+">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">min()</span></td>
+                            <td><span class="value-mono">min(value1, value2, ...)</span></td>
+                            <td>Takes smallest value</td>
+                            <td><span class="example">width: min(100%, 600px);</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 79+">C</span><span class="browser-icon supported" title="Firefox: 75+">F</span><span class="browser-icon supported" title="Safari: 11.1+">S</span><span class="browser-icon supported" title="Edge: 79+">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">max()</span></td>
+                            <td><span class="value-mono">max(value1, value2, ...)</span></td>
+                            <td>Takes largest value</td>
+                            <td><span class="example">font-size: max(1rem, 4vw);</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 79+">C</span><span class="browser-icon supported" title="Firefox: 75+">F</span><span class="browser-icon supported" title="Safari: 11.1+">S</span><span class="browser-icon supported" title="Edge: 79+">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="unit-badge">calc()</span></td>
+                            <td><span class="value-mono">calc(expression)</span></td>
+                            <td>Math operations</td>
+                            <td><span class="example">width: calc(100% - 2rem);</span></td>
+                            <td><div class="browser-support"><span class="browser-icon supported" title="Chrome: 26+">C</span><span class="browser-icon supported" title="Firefox: 16+">F</span><span class="browser-icon supported" title="Safari: All">S</span><span class="browser-icon supported" title="Edge: All">E</span></div></td>
+                            <td><span class="status-badge status-stable">Stable</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="edit-hint">💡 Click any text to edit | Search to filter</div>
+
+    <script>
+        // Tab Switching
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                button.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
+        // Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const filterInfo = document.getElementById('filterInfo');
+        const allTableBody = document.getElementById('allTableBody');
+
+        // Data for all units
+        const allUnitsData = [
+            // Absolute
+            { category: 'Absolute', unit: 'px', name: 'Pixel', value: '1/96th inch', bestFor: 'Icons, borders', example: 'font-size: 16px;', browser: 'C F S E' },
+            { category: 'Absolute', unit: 'pt', name: 'Point', value: '1/72 inch', bestFor: 'Print only', example: '@media print { 12pt; }', browser: 'C F S E' },
+            { category: 'Absolute', unit: 'pc', name: 'Pica', value: '12 points', bestFor: 'Print, rarely', example: 'margin: 1pc;', browser: 'C F S E' },
+            { category: 'Absolute', unit: 'cm', name: 'Centimeter', value: 'Physical', bestFor: 'Print only', example: '@media print { 2cm; }', browser: 'C F S E' },
+            { category: 'Absolute', unit: 'mm', name: 'Millimeter', value: 'Physical', bestFor: 'Print only', example: 'border: 1mm solid;', browser: 'C F S E' },
+            { category: 'Absolute', unit: 'in', name: 'Inch', value: 'Physical', bestFor: 'Print only', example: '@media print { 8.5in; }', browser: 'C F S E' },
+            { category: 'Absolute', unit: 'Q', name: 'Quarter-mm', value: '0.25mm', bestFor: 'Print fine control', example: 'border-width: 8Q;', browser: 'C F S E' },
+            // Font-Relative
+            { category: 'Font-Relative', unit: 'em', name: 'Em', value: "Parent's font-size", bestFor: 'Component scaling', example: 'padding: 2em;', browser: 'C F S E' },
+            { category: 'Font-Relative', unit: '%', name: 'Percent', value: "Parent's font-size", bestFor: 'Proportional sizing', example: 'font-size: 150%;', browser: 'C F S E' },
+            { category: 'Font-Relative', unit: 'ex', name: 'X-height', value: 'Lowercase x height', bestFor: 'Fine alignment', example: 'height: 2ex;', browser: 'C F S E' },
+            { category: 'Font-Relative', unit: 'ch', name: 'Character width', value: 'Width of 0 zero', bestFor: 'Optimal line length', example: 'max-width: 65ch;', browser: 'C F S E' },
+            { category: 'Font-Relative', unit: 'cap', name: 'Cap height', value: 'Capital letter height', bestFor: 'Icon alignment', example: 'height: 2cap;', browser: 'C F S' },
+            { category: 'Font-Relative', unit: 'ic', name: 'Ideographic', value: 'Width of CJK', bestFor: 'CJK text sizing', example: 'font-size: 1.5ic;', browser: 'C F S' },
+            { category: 'Font-Relative', unit: 'lh', name: 'Line-height', value: "Element's line-height", bestFor: 'Vertical rhythm', example: 'margin: 1.5lh;', browser: 'C F S' },
+            // Root-Relative
+            { category: 'Root-Relative', unit: 'rem', name: 'Root em', value: "Root's font-size", bestFor: 'Global consistency', example: 'font-size: 1rem;', browser: 'C F S E' },
+            { category: 'Root-Relative', unit: 'rex', name: 'Root x-height', value: "Root's x-height", bestFor: 'Root alignment', example: 'margin: 1.5rex;', browser: 'C F S' },
+            { category: 'Root-Relative', unit: 'rch', name: 'Root character', value: "Root's 0 zero", bestFor: 'Consistent line limits', example: 'max-width: 70rch;', browser: 'C F S' },
+            { category: 'Root-Relative', unit: 'rcap', name: 'Root cap height', value: "Root's capital", bestFor: 'Root icon align', example: 'height: 2rcap;', browser: 'C F S' },
+            { category: 'Root-Relative', unit: 'ric', name: 'Root ideographic', value: "Root's CJK", bestFor: 'Root CJK sizing', example: 'padding: 1ric;', browser: 'C F S' },
+            { category: 'Root-Relative', unit: 'rlh', name: 'Root line-height', value: "Root's line-height", bestFor: 'Document rhythm', example: 'margin: 1rlh;', browser: 'C F S' },
+            // Viewport
+            { category: 'Viewport', unit: 'vw', name: 'Viewport width', value: '1% of width', bestFor: 'Responsive headings', example: 'font-size: 4vw;', browser: 'C F S E' },
+            { category: 'Viewport', unit: 'vh', name: 'Viewport height', value: '1% of height', bestFor: 'Full-screen sections', example: 'height: 100vh;', browser: 'C F S E' },
+            { category: 'Viewport', unit: 'vmin', name: 'Viewport min', value: '1% smaller dim', bestFor: 'Safe responsive', example: 'font-size: 4vmin;', browser: 'C F S E' },
+            { category: 'Viewport', unit: 'vmax', name: 'Viewport max', value: '1% larger dim', bestFor: 'Scaling largest', example: 'font-size: 4vmax;', browser: 'C F S E' },
+            { category: 'Viewport', unit: 'vi', name: 'Viewport inline', value: '1% inline axis', bestFor: 'Horizontal mode', example: 'width: 50vi;', browser: 'C F S E' },
+            { category: 'Viewport', unit: 'vb', name: 'Viewport block', value: '1% block axis', bestFor: 'Vertical mode', example: 'height: 50vb;', browser: 'C F S E' },
+            { category: 'Viewport', unit: 'svw/svh', name: 'Small viewport', value: 'Browser UI hidden', bestFor: 'Mobile apps', example: 'height: 100svh;', browser: 'C F S E' },
+            { category: 'Viewport', unit: 'lvw/lvh', name: 'Large viewport', value: 'Browser UI visible', bestFor: 'Desktop layouts', example: 'height: 100lvh;', browser: 'C F S E' },
+            { category: 'Viewport', unit: 'dvw/dvh', name: 'Dynamic viewport', value: 'Changes with UI', bestFor: 'Mobile responsive', example: 'height: 100dvh;', browser: 'C F S E' },
+            // Container
+            { category: 'Container', unit: 'cqw', name: 'Container width', value: '1% of width', bestFor: 'Width-based scaling', example: 'font-size: 5cqw;', browser: 'C F S E' },
+            { category: 'Container', unit: 'cqh', name: 'Container height', value: '1% of height', bestFor: 'Height-based', example: 'font-size: 4cqh;', browser: 'C F S E' },
+            { category: 'Container', unit: 'cqi', name: 'Container inline', value: '1% inline size', bestFor: 'Horizontal scaling', example: 'font-size: 5cqi;', browser: 'C F S E' },
+            { category: 'Container', unit: 'cqb', name: 'Container block', value: '1% block size', bestFor: 'Vertical scaling', example: 'font-size: 4cqb;', browser: 'C F S E' },
+            { category: 'Container', unit: 'cqmin', name: 'Container min', value: 'Min of cqi/cqb', bestFor: 'Proportional', example: 'padding: 2cqmin;', browser: 'C F S E' },
+            { category: 'Container', unit: 'cqmax', name: 'Container max', value: 'Max of cqi/cqb', bestFor: 'Proportional', example: 'border-radius: 1cqmax;', browser: 'C F S E' },
+            // Functions
+            { category: 'Functions', unit: 'clamp()', name: 'Clamp', value: 'min, pref, max', bestFor: 'Responsive bounds', example: 'font-size: clamp(1rem, 2vw, 3rem);', browser: 'C F S E' },
+            { category: 'Functions', unit: 'min()', name: 'Minimum', value: 'value1, value2...', bestFor: 'Smallest value', example: 'width: min(100%, 600px);', browser: 'C F S E' },
+            { category: 'Functions', unit: 'max()', name: 'Maximum', value: 'value1, value2...', bestFor: 'Largest value', example: 'font-size: max(1rem, 4vw);', browser: 'C F S E' },
+            { category: 'Functions', unit: 'calc()', name: 'Calculate', value: 'expression', bestFor: 'Math operations', example: 'width: calc(100% - 2rem);', browser: 'C F S E' },
+        ];
+
+        function renderAllTable(data = allUnitsData) {
+            allTableBody.innerHTML = '';
+            data.forEach(item => {
+                const row = `
+                    <tr>
+                        <td><span class="unit-badge">${item.unit}</span></td>
+                        <td>${item.name}</td>
+                        <td>${item.value}</td>
+                        <td>${item.bestFor}</td>
+                        <td><span class="example">${item.example}</span></td>
+                        <td><div class="browser-support">${item.browser}</div></td>
+                        <td><span class="status-badge status-stable">${item.category}</span></td>
+                    </tr>
+                `;
+                allTableBody.innerHTML += row;
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (!query) {
+                renderAllTable(allUnitsData);
+                filterInfo.textContent = '';
+                return;
+            }
+
+            const filtered = allUnitsData.filter(item =>
+                item.unit.toLowerCase().includes(query) ||
+                item.name.toLowerCase().includes(query) ||
+                item.category.toLowerCase().includes(query) ||
+                item.bestFor.toLowerCase().includes(query)
+            );
+
+            renderAllTable(filtered);
+            filterInfo.textContent = `Found ${filtered.length} matching unit${filtered.length !== 1 ? 's' : ''}`;
+        });
+
+        // Enable contenteditable on table cells
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'TD' || e.target.closest('td')) {
+                const td = e.target.closest('td');
+                if (td && !td.querySelector('[contenteditable]')) {
+                    td.contentEditable = 'true';
+                    td.focus();
+                }
+            }
+        });
+
+        // Initial render
+        renderAllTable();
+
+        console.log('%c✨ CSS Font-Size Units Reference', 'color: #667eea; font-size: 16px; font-weight: bold;');
+        console.log('%cClick any text to edit | Use search to filter units', 'color: #999; font-size: 12px;');
+    </script>
+</body>
+</html>
