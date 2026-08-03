@@ -1,0 +1,285 @@
+/* ─── Layout ─────────────────────────────────────────────────────────────── */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: oklch(65% 0.18 145 / 0.15);
+  color: oklch(65% 0.18 145);
+  letter-spacing: 0.04em;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888;
+  line-height: 1.6;
+}
+
+.mark {
+  background: oklch(75% 0.18 60 / 0.2);
+  color: oklch(75% 0.18 60);
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+/* ─── Controls ───────────────────────────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  padding: 1rem 1.25rem;
+  background: #0a0a0a;
+  border: 1px solid #1e1e1e;
+  border-radius: 10px;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 160px;
+}
+
+.controlLabel {
+  font-size: 0.72rem;
+  color: #666;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.controlLabel code {
+  font-family: "JetBrains Mono", monospace;
+  color: #aaa;
+}
+
+.controlHint {
+  font-size: 0.68rem;
+  color: #555;
+  line-height: 1.4;
+  min-height: 2.4em;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.btn {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+  border-radius: 6px;
+  border: 1px solid #252525;
+  background: #111;
+  color: #666;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.btn:hover {
+  border-color: #333;
+  color: #aaa;
+}
+
+.btnActive {
+  border-color: oklch(65% 0.18 270 / 0.6);
+  background: oklch(65% 0.18 270 / 0.1);
+  color: oklch(75% 0.18 270);
+}
+
+/* ─── Preview ────────────────────────────────────────────────────────────── */
+
+.preview {
+  position: relative;
+  border: 1px solid #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Column guides sit behind the content */
+.columnGuides {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), 1fr);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.columnGuide {
+  border-right: 1px dashed #1a1a1a;
+  display: flex;
+  align-items: flex-start;
+  padding: 0.5rem 0.5rem 0;
+}
+
+.columnGuide:last-child {
+  border-right: none;
+}
+
+.columnLabel {
+  font-size: 0.6rem;
+  color: #2a2a2a;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Multi-column container */
+.columns {
+  position: relative;
+  z-index: 1;
+  column-gap: 2rem;
+  padding: 2rem 1.5rem 1.5rem;
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────────────── */
+
+.card {
+  break-inside: avoid; /* default: keep individual cards intact */
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+/* The highlighted card — the one break rules are applied to */
+.cardHighlight {
+  border-color: oklch(75% 0.18 60 / 0.5);
+  background: oklch(75% 0.18 60 / 0.04);
+  box-shadow: 0 0 0 1px oklch(75% 0.18 60 / 0.1);
+}
+
+.targetBadge {
+  display: block;
+  font-size: 0.62rem;
+  color: oklch(75% 0.18 60 / 0.7);
+  font-family: "JetBrains Mono", monospace;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.04em;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: oklch(65% 0.18 270 / 0.12);
+  color: oklch(70% 0.18 270);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.04em;
+}
+
+.title {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.desc {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ─── Explainer ──────────────────────────────────────────────────────────── */
+
+.explainer {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.85rem 1rem;
+  background: #0a0a0a;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #888;
+  line-height: 1.6;
+}
+
+.explainerIcon {
+  flex-shrink: 0;
+  font-size: 1rem;
+  margin-top: 0.05rem;
+}
+
+.explainer strong {
+  color: #ccc;
+}
+
+/* ─── Code panel ─────────────────────────────────────────────────────────── */
+
+.codePanel {
+  background: #080808;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.codePanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.codePanelLabel {
+  font-size: 0.65rem;
+  color: #444;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.codePanelActive {
+  font-size: 0.65rem;
+  font-family: "JetBrains Mono", monospace;
+  color: oklch(70% 0.18 270);
+  letter-spacing: 0.04em;
+}
+
+.pre {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.78rem;
+  font-family: "JetBrains Mono", monospace;
+  color: #aaa;
+  line-height: 1.7;
+  overflow-x: auto;
+}
