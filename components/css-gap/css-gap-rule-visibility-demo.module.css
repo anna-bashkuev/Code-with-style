@@ -1,0 +1,24 @@
+.cell-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cell-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.demo-cell--empty {
+  visibility: hidden;
+}
+.legend table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.legend-row--active td {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  font-weight: 600;
+}
+
