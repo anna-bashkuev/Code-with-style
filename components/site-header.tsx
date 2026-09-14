@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { GitBranch, Menu, Component } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/lib/site-config"
 
@@ -41,7 +40,6 @@ export function SiteHeader({ onMenuClick }: { onMenuClick: () => void }) {
           >
             <GitBranch />
           </a>
-          <ThemeToggle />
         </div>
       </div>
     </header>

@@ -18,25 +18,9 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: '#2b2b2b' },
-  ],
+  colorScheme: 'dark',
+  themeColor: '#2b2b2b',
 }
-
-// Set the theme before paint to avoid a flash of the wrong color scheme.
-const themeScript = `
-(function() {
-  try {
-    var stored = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (stored === 'dark' || (!stored && prefersDark)) {
-      document.documentElement.classList.add('dark');
-    }
-  } catch (e) {}
-})();
-`
 
 export default function RootLayout({
   children,
@@ -46,12 +30,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} bg-background`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} bg-background`}
       suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="font-sans antialiased">
         <SiteShell>{children}</SiteShell>
         {process.env.NODE_ENV === 'production' && <Analytics />}
