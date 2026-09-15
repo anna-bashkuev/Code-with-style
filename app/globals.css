@@ -301,12 +301,15 @@
     padding-block: 2.5rem;
   }
 
+  /* Groups the controls + preview + code sections into one module inside the
+     single ComponentPreview card. No border/background of its own so it never
+     reads as a card-in-card — ComponentPreview is the only card. */
    .demo-wrap {
     width: 100%;
     max-width: 100%;
     margin-inline: auto;
-    background: var(--card);
-    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
     border-radius: 6px;
     overflow: hidden;
   }
