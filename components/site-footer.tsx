@@ -8,7 +8,7 @@ export function SiteFooter() {
         <p className="text-balance text-center sm:text-left">
           {"Built with "}
           <span className="font-semibold text-foreground">{siteConfig.name}</span>
-          {" — a component showcase boilerplate."}
+          {" — try it out."}
         </p>
         <div className="flex items-center gap-4">
           <Link href="/" className="transition-colors hover:text-foreground">
