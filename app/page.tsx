@@ -49,41 +49,16 @@ export default function OverviewPage() {
           {siteConfig.description}
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            CwS 1.0
-            <ArrowRight />
-          </Link>
-          <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            CwS 2.0 Popover API
-            <ArrowRight />
-          </Link>
-          <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            CwS 3.0 CSS Performance
-            <ArrowRight />
-          </Link>
-          <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            CwS 4.0 CSS Logic
-            <ArrowRight />
-          </Link>
-
-           <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            <ArrowRight />
-          </Link>
+          {navSections.map((section) => (
+            <Link
+              key={section.slug}
+              href={`/cws/${section.slug}`}
+              className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
+            >
+              {section.title}
+              <ArrowRight />
+            </Link>
+          ))}
           <Link
             href="/installation"
             className={cn(buttonVariants({ variant: "outline", size: "lg" }), "inline-flex")}

@@ -10,10 +10,22 @@ export function SiteSidebar({ onNavigate }: { onNavigate?: () => void }) {
 
   return (
     <nav aria-label="Component navigation" className="flex flex-col gap-9 p-4 lg:p-6">
-      {navSections.map((section) => (
+      {navSections.map((section) => {
+        const isSectionActive = pathname === `/cws/${section.slug}`
+        return (
         <div key={section.title} className="flex flex-col gap-2">
-          <h2 className="nav-section-title px-3 pb-1 text-muted-foreground">
-            {section.title}
+          <h2 className="nav-section-title px-3 pb-1">
+            <Link
+              href={`/cws/${section.slug}`}
+              onClick={onNavigate}
+              aria-current={isSectionActive ? "page" : undefined}
+              className={cn(
+                "nav-section-link rounded transition-colors hover:text-primary",
+                isSectionActive ? "text-primary" : "text-muted-foreground",
+              )}
+            >
+              {section.title}
+            </Link>
           </h2>
           <ul className="flex flex-col gap-0.5">
             {section.items.map((item) => {
@@ -43,7 +55,8 @@ export function SiteSidebar({ onNavigate }: { onNavigate?: () => void }) {
             })}
           </ul>
         </div>
-      ))}
+        )
+      })}
     </nav>
   )
 }
