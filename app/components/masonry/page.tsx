@@ -1,6 +1,10 @@
-
 import { MasonryLayoutDemo } from "@/components/masonry-layout-demo";
+import { PageShell } from "@/components/page-shell";
 
 export default function MasonryLayoutPage() {
-  return <MasonryLayoutDemo />;
+  return (
+    <PageShell>
+      <MasonryLayoutDemo />
+    </PageShell>
+  );
 }

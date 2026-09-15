@@ -1,7 +1,10 @@
-
 import { AnchorPositioningDemo } from "@/components/anchor-positioning-demo";
+import { PageShell } from "@/components/page-shell";
 
 export default function AnchorPositioningPage() {
-  return <AnchorPositioningDemo />;
-  
+  return (
+    <PageShell>
+      <AnchorPositioningDemo />
+    </PageShell>
+  );
 }

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function MultiColumnCardsPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10 lg:py-14">
+    <PageShell>
       <PageHeader
         eyebrow="Components"
         title="Multi-column cards"
@@ -18,7 +18,7 @@ export default function MultiColumnCardsPage() {
 Wrapping Features"
       />
       <MultiColumnCardsDemo />
-       <PageNav />
-    </div>
-  );
+      <PageNav />
+    </PageShell>
+  )
 }

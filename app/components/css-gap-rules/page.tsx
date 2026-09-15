@@ -1,6 +1,10 @@
-
 import { CssGapRulesDemo } from "@/components/css-gap/css-gap-rules-demo";
+import { PageShell } from "@/components/page-shell";
 
 export default function CssGapRulesPage() {
-  return <CssGapRulesDemo />;
+  return (
+    <PageShell>
+      <CssGapRulesDemo />
+    </PageShell>
+  );
 }

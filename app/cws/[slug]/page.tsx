@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
+import { PageShell } from "@/components/page-shell"
 import { navSections, getSectionBySlug } from "@/lib/site-config"
 
 export function generateStaticParams() {
@@ -38,7 +39,7 @@ export default async function CwsOverviewPage({
     currentIndex < navSections.length - 1 ? navSections[currentIndex + 1] : null
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10 lg:py-14">
+    <PageShell>
       <PageHeader
         eyebrow={section.version}
         title={section.title}
@@ -104,6 +105,6 @@ export default async function CwsOverviewPage({
           </Link>
         ) : null}
       </nav>
-    </div>
+    </PageShell>
   )
 }
