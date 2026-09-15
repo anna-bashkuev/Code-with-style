@@ -291,6 +291,9 @@
   .badge-amber  { color: var(--amber); border-color: var(--amber); background: #7a4a0033; }
 
    .demo-wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 6px;
