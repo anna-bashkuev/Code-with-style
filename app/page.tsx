@@ -33,17 +33,17 @@ const features = [
 ]
 
 export default function OverviewPage() {
-  const componentCount = navSections.find((s) => s.title === "Components")?.items.length ?? 0
+  const componentCount = navSections.reduce((count, section) => count + section.items.length, 0)
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-12 lg:py-20">
       <section className="flex flex-col gap-6">
         <span className="eyebrow inline-flex w-fit items-center gap-2 rounded-full border border-border bg-muted/50 px-3.5 py-1.5 text-muted-foreground">
           <span className="size-1.5 rounded-full bg-primary" />
-          {siteConfig.version} · Boilerplate
+          {siteConfig.version} · Code with style
         </span>
         <h1 className="page-title text-balance">
-          Code with style. A Next.js V0 boilerplate for building some amazing things I want to share.
+          Code with style. Interactive examples that let you change, test, and experience modern CSS and HTML features.
         </h1>
         <p className="hero-copy max-w-2xl text-muted-foreground text-pretty">
           {siteConfig.description}
@@ -53,7 +53,35 @@ export default function OverviewPage() {
             href="/components/buttons"
             className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
           >
-            Browse components
+            CwS 1.0
+            <ArrowRight />
+          </Link>
+          <Link
+            href="/components/buttons"
+            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
+          >
+            CwS 2.0 Popover API
+            <ArrowRight />
+          </Link>
+          <Link
+            href="/components/buttons"
+            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
+          >
+            CwS 3.0 CSS Performance
+            <ArrowRight />
+          </Link>
+          <Link
+            href="/components/buttons"
+            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
+          >
+            CwS 4.0 CSS Logic
+            <ArrowRight />
+          </Link>
+
+           <Link
+            href="/components/buttons"
+            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
+          >
             <ArrowRight />
           </Link>
           <Link
