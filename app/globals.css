@@ -290,12 +290,26 @@
   .badge-green  { color: var(--green); border-color: var(--green); background: #1a6b3a33; }
   .badge-amber  { color: var(--amber); border-color: var(--amber); background: #7a4a0033; }
 
+  /* Unified page width shared by every route. Change --page-max in one
+     place to resize all pages and example canvases together. */
+  .page-shell {
+    --page-max: 1200px;
+    width: 100%;
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    padding-block: 2.5rem;
+  }
+
+  /* Groups the controls + preview + code sections into one module inside the
+     single ComponentPreview card. No border/background of its own so it never
+     reads as a card-in-card — ComponentPreview is the only card. */
    .demo-wrap {
     width: 100%;
-    max-width: 1200px;
+    max-width: 100%;
     margin-inline: auto;
-    background: var(--card);
-    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
     border-radius: 6px;
     overflow: hidden;
   }

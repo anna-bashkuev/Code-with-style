@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Check } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
 import { PageNav } from "@/components/page-nav"
+import { PageShell } from "@/components/page-shell"
 import { ComponentPreview } from "@/components/component-preview"
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function BadgesPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10 lg:py-14">
+    <PageShell>
       <PageHeader
         eyebrow="Components"
         title="Badges"
@@ -86,6 +87,6 @@ export default function BadgesPage() {
       </div>
 
       <PageNav />
-    </div>
+    </PageShell>
   )
 }

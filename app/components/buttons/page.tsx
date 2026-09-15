@@ -3,6 +3,7 @@ import { ArrowRight, Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PageHeader } from "@/components/page-header"
 import { PageNav } from "@/components/page-nav"
+import { PageShell } from "@/components/page-shell"
 import { ComponentPreview } from "@/components/component-preview"
 
 export const metadata: Metadata = {
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ButtonsPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10 lg:py-14">
+    <PageShell>
       <PageHeader
         eyebrow="Components"
         title="Buttons"
@@ -87,6 +88,6 @@ export default function ButtonsPage() {
       </div>
 
       <PageNav />
-    </div>
+    </PageShell>
   )
 }

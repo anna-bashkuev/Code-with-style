@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { PageHeader } from "@/components/page-header"
 import { PageNav } from "@/components/page-nav"
+import { PageShell } from "@/components/page-shell"
 
 export const metadata: Metadata = {
   title: "Installation",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function InstallationPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10 lg:py-14">
+    <PageShell>
       <PageHeader
         eyebrow="Getting Started"
         title="Installation"
@@ -49,18 +50,19 @@ lib/
           </p>
           <pre className="mt-3 overflow-x-auto rounded-lg border border-border bg-card p-4">
             <code className="font-mono text-foreground">{`import { PageHeader } from "@/components/page-header"
+import { PageShell } from "@/components/page-shell"
 import { ComponentPreview } from "@/components/component-preview"
 import { PageNav } from "@/components/page-nav"
 
 export default function Page() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10 lg:py-14">
+    <PageShell>
       <PageHeader title="Tooltip" description="..." />
       <ComponentPreview title="Default" code={"<Tooltip />"}>
         {/* your example */}
       </ComponentPreview>
       <PageNav />
-    </div>
+    </PageShell>
   )
 }`}</code>
           </pre>
@@ -99,7 +101,7 @@ in{" "}
       </div>
 
       <PageNav />
-    </div>
+    </PageShell>
   )
 }
 

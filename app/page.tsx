@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight, Layers, Palette, Boxes, Compass } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { PageNav } from "@/components/page-nav"
+import { PageShell } from "@/components/page-shell"
 import { cn } from "@/lib/utils"
 import { siteConfig, navSections } from "@/lib/site-config"
 
@@ -36,7 +37,7 @@ export default function OverviewPage() {
   const componentCount = navSections.reduce((count, section) => count + section.items.length, 0)
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-12 lg:py-20">
+    <PageShell className="!py-12 lg:!py-20">
       <section className="flex flex-col gap-6">
         <span className="eyebrow inline-flex w-fit items-center gap-2 rounded-full border border-border bg-muted/50 px-3.5 py-1.5 text-muted-foreground">
           <span className="size-1.5 rounded-full bg-primary" />
@@ -49,41 +50,16 @@ export default function OverviewPage() {
           {siteConfig.description}
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            CwS 1.0
-            <ArrowRight />
-          </Link>
-          <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            CwS 2.0 Popover API
-            <ArrowRight />
-          </Link>
-          <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            CwS 3.0 CSS Performance
-            <ArrowRight />
-          </Link>
-          <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            CwS 4.0 CSS Logic
-            <ArrowRight />
-          </Link>
-
-           <Link
-            href="/components/buttons"
-            className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
-          >
-            <ArrowRight />
-          </Link>
+          {navSections.map((section) => (
+            <Link
+              key={section.slug}
+              href={`/cws/${section.slug}`}
+              className={cn(buttonVariants({ size: "lg" }), "inline-flex")}
+            >
+              {section.title}
+              <ArrowRight />
+            </Link>
+          ))}
           <Link
             href="/installation"
             className={cn(buttonVariants({ variant: "outline", size: "lg" }), "inline-flex")}
@@ -154,6 +130,6 @@ export default function OverviewPage() {
       </section>
 
       <PageNav />
-    </div>
+    </PageShell>
   )
 }
