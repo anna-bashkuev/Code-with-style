@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { PageHeader } from "@/components/page-header"
 import { MultiColumnCardsDemo } from "./multi-column-demo"
 import { PageNav } from "@/components/page-nav"
+import { PageShell } from "@/components/page-shell"
 import "./style.css"
 
 export const metadata: Metadata = {
