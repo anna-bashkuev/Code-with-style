@@ -18,7 +18,7 @@ export function PageNav() {
       {prev ? (
         <Link
           href={prev.href}
-          className="group flex flex-col gap-1.5 rounded-lg border border-border p-5 transition-colors hover:border-primary/40 hover:bg-muted"
+          className="neon-link group flex flex-col gap-1.5 rounded-lg border border-border p-5 transition-colors hover:bg-muted"
         >
           <span className="note-text flex items-center gap-1.5 text-muted-foreground">
             <ArrowLeft className="size-4" />
@@ -32,7 +32,7 @@ export function PageNav() {
       {next ? (
         <Link
           href={next.href}
-          className="group flex flex-col items-end gap-1.5 rounded-lg border border-border p-5 text-right transition-colors hover:border-primary/40 hover:bg-muted sm:col-start-2"
+          className="neon-link group flex flex-col items-end gap-1.5 rounded-lg border border-border p-5 text-right transition-colors hover:bg-muted sm:col-start-2"
         >
           <span className="note-text flex items-center gap-1.5 text-muted-foreground">
             Next

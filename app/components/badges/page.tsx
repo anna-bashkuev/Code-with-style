@@ -34,13 +34,13 @@ export default function BadgesPage() {
   Secondary
 </span>`}
         >
-          <span className="inline-flex items-center rounded-full bg-primary px-2.5 py-0.5 note-text font-medium text-primary-foreground">
+          <span className="neon-badge-solid inline-flex items-center rounded-full bg-primary px-2.5 py-0.5 note-text font-medium text-primary-foreground">
             Solid
           </span>
-          <span className="inline-flex items-center rounded-full bg-accent px-2.5 py-0.5 note-text font-medium text-accent-foreground">
+          <span className="neon-badge inline-flex items-center rounded-full px-2.5 py-0.5 note-text font-medium">
             Soft
           </span>
-          <span className="inline-flex items-center rounded-full border border-border px-2.5 py-0.5 note-text font-medium text-foreground">
+          <span className="neon-badge inline-flex items-center rounded-full px-2.5 py-0.5 note-text font-medium">
             Outline
           </span>
           <span className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 note-text font-medium text-secondary-foreground">
@@ -61,7 +61,7 @@ export default function BadgesPage() {
   <span className="size-1.5 rounded-full bg-destructive" /> Error
 </span>`}
         >
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-0.5 note-text font-medium">
+          <span className="neon-badge inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 note-text font-medium">
             <span className="size-1.5 rounded-full bg-primary" /> Active
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-0.5 note-text font-medium text-muted-foreground">
@@ -79,7 +79,7 @@ export default function BadgesPage() {
   <Check className="size-3" /> Verified
 </span>`}
         >
-          <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-0.5 note-text font-medium text-accent-foreground">
+          <span className="neon-badge inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 note-text font-medium">
             <Check className="size-3" /> Verified
           </span>
         </ComponentPreview>

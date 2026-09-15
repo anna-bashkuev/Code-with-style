@@ -9,9 +9,9 @@ export function SiteSidebar({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname()
 
   return (
-    <nav aria-label="Component navigation" className="flex flex-col gap-6 p-4 lg:p-6">
+    <nav aria-label="Component navigation" className="flex flex-col gap-9 p-4 lg:p-6">
       {navSections.map((section) => (
-        <div key={section.title} className="flex flex-col gap-1.5">
+        <div key={section.title} className="flex flex-col gap-2">
           <h2 className="nav-section-title px-3 pb-1 text-muted-foreground">
             {section.title}
           </h2>
