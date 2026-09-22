@@ -95,15 +95,15 @@ export function BreakInside() {
       </div>
 
       {/* ── Controls ── */}
-      <div className={styles.controls}>
+      <div className="controls">
         {/* column-count */}
-        <div className={styles.controlGroup}>
+        <div className="control-group">
           <span className={styles.controlLabel}>column-count</span>
-          <div className={styles.buttonRow}>
+          <div className="button-group">
             {[2, 3, 4].map((n) => (
               <button
                 key={n}
-                className={`${styles.btn} ${columnCount === n ? styles.btnActive : ""}`}
+                className={`input ${columnCount === n ? "active" : ""}`}
                 onClick={() => setColumnCount(n)}
               >
                 {n}
@@ -113,15 +113,15 @@ export function BreakInside() {
         </div>
 
         {/* break-inside */}
-        <div className={styles.controlGroup}>
+        <div className="control-group">
           <span className={styles.controlLabel}>
             <code>break-inside</code>
           </span>
-          <div className={styles.buttonRow}>
+          <div className="button-group">
             {BREAK_INSIDE_VALUES.map((v) => (
               <button
                 key={v}
-                className={`${styles.btn} ${breakInside === v ? styles.btnActive : ""}`}
+                className={`input ${breakInside === v ? "active" : ""}`}
                 onClick={() => setBreakInside(v)}
               >
                 {v}
@@ -136,15 +136,15 @@ export function BreakInside() {
         </div>
 
         {/* break-before */}
-        <div className={styles.controlGroup}>
+        <div className="control-group">
           <span className={styles.controlLabel}>
             <code>break-before</code>
           </span>
-          <div className={styles.buttonRow}>
+          <div className="button-group">
             {BREAK_BEFORE_VALUES.map((v) => (
               <button
                 key={v}
-                className={`${styles.btn} ${breakBefore === v ? styles.btnActive : ""}`}
+                className={`input ${breakBefore === v ? "active" : ""}`}
                 onClick={() => setBreakBefore(v)}
               >
                 {v}
@@ -159,15 +159,15 @@ export function BreakInside() {
         </div>
 
         {/* break-after */}
-        <div className={styles.controlGroup}>
+        <div className="control-group">
           <span className={styles.controlLabel}>
             <code>break-after</code>
           </span>
-          <div className={styles.buttonRow}>
+          <div className="button-group">
             {BREAK_AFTER_VALUES.map((v) => (
               <button
                 key={v}
-                className={`${styles.btn} ${breakAfter === v ? styles.btnActive : ""}`}
+                className={`input ${breakAfter === v ? "active" : ""}`}
                 onClick={() => setBreakAfter(v)}
               >
                 {v}

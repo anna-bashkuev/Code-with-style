@@ -101,7 +101,7 @@ ${displayRule}  gap: 16px;
         <h2>
           05 — <code>rule-visibility-items</code>
         </h2>
-        <span className="badge badge-red">Experimental — flag only</span>
+        <span className="badge badge-red">Experimental</span>
       </div>
 
       <div className="demo-wrap">
@@ -134,13 +134,13 @@ ${displayRule}  gap: 16px;
             <label>Layout</label>
             <div className="button-group">
               <button
-                className={layout === "grid" ? "active" : ""}
+                className={`input ${layout === "grid" ? "active" : ""}`}
                 onClick={() => setLayout("grid")}
               >
                 grid
               </button>
               <button
-                className={layout === "flex" ? "active" : ""}
+                className={`input ${layout === "flex" ? "active" : ""}`}
                 onClick={() => setLayout("flex")}
               >
                 flex
@@ -203,9 +203,9 @@ ${displayRule}  gap: 16px;
           {/* Cell toggles */}
           <div className="control-group">
             <label>Visible cells</label>
-            <div className="{styles.cell-toggles}">
+            <div className={styles["cell-toggles"]}>
               {visibleCells.map((visible, i) => (
-                <label key={i} className="{styles.cell-toggle}">
+                <label key={i} className={styles["cell-toggle"]}>
                   <input
                     type="checkbox"
                     checked={visible}
@@ -251,7 +251,7 @@ ${displayRule}  gap: 16px;
       </div>
 
       {/* Value legend */}
-      <div className="{styles.legend}">
+      <div className={styles.legend}>
         <table>
           <thead>
             <tr>

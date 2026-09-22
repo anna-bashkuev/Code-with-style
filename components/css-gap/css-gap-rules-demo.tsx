@@ -19,26 +19,25 @@ export function CssGapRulesDemo() {
   const [ruleColor, setRuleColor] = useState("#3b82f6");
   const [showRowRule, setShowRowRule] = useState(true);
   const [showColRule, setShowColRule] = useState(true);
-  
 
-   const PALETTE = [
-     "#3b82f6",
-     "#10b981",
-     "#f59e0b",
-     "#ef4444",
-     "#a855f7",
-     "#e2e8f0",
-   ];
-   const STYLES = ["solid", "dashed", "dotted", "double"];
+  const PALETTE = [
+    "#3b82f6",
+    "#10b981",
+    "#f59e0b",
+    "#ef4444",
+    "#a855f7",
+    "#e2e8f0",
+  ];
+  const STYLES = ["solid", "dashed", "dotted", "double"];
 
   // Example 03 controls — rule-break + rule-outset
   const [ruleBreak, setRuleBreak] = useState<"none" | "intersection">(
     "intersection",
   );
-  const [colOutset, setColOutset] = useState(-12);
-  const [rowOutset, setRowOutset] = useState(0);
-  const [ex3ColColor, setEx3ColColor] = useState("#f59e0b");
-  const [ex3RowColor, setEx3RowColor] = useState("#f59e0b");
+  const [colOutset] = useState(-12);
+  const [rowOutset] = useState(0);
+  const [ex3ColColor] = useState("#f59e0b");
+  const [ex3RowColor] = useState("#f59e0b");
 
   const colors = [
     "#3b82f6",
@@ -107,19 +106,21 @@ export function CssGapRulesDemo() {
 
         <div className="demo-wrap">
           <div className="controls">
-            <label htmlFor="gd-layout">layout:</label>
-            <select
-              id="gd-layout"
-              value={layout}
-              onChange={(e) => setLayout(e.target.value as "grid" | "flex")}
-            >
-              <option value="grid">display: grid</option>
-              <option value="flex">display: flex</option>
-            </select>
+            <div className="control-group">
+              <span>layout:</span>
+              <select
+                id="gd-layout"
+                value={layout}
+                onChange={(e) => setLayout(e.target.value as "grid" | "flex")}
+              >
+                <option value="grid">display: grid</option>
+                <option value="flex">display: flex</option>
+              </select>
+            </div>
 
             {layout === "grid" && (
-              <>
-                <label htmlFor="gd-cols">columns:</label>
+              <div className="control-group">
+                <span>columns:</span>
                 <select
                   id="gd-cols"
                   value={cols}
@@ -129,73 +130,63 @@ export function CssGapRulesDemo() {
                   <option value={3}>3</option>
                   <option value={4}>4</option>
                 </select>
-              </>
+              </div>
             )}
-
-            <label htmlFor="gd-style">rule-style:</label>
-            <select
-              id="gd-style"
-              value={ruleStyle}
-              onChange={(e) => setRuleStyle(e.target.value)}
-            >
-              <option value="solid">solid</option>
-              <option value="dashed">dashed</option>
-              <option value="dotted">dotted</option>
-              <option value="double">double</option>
-            </select>
-
-            <label htmlFor="gd-width">rule-width:</label>
-            <input
-              id="gd-width"
-              type="range"
-              min="1"
-              max="6"
-              value={ruleWidth}
-              onChange={(e) => setRuleWidth(Number(e.target.value))}
-            />
-            <span className="val">{ruleWidth}px</span>
-
-            <label>rule-color:</label>
-            <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-              {colors.map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setRuleColor(c)}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: "50%",
-                    background: c,
-                    border:
-                      ruleColor === c
-                        ? "2px solid white"
-                        : "2px solid transparent",
-                    cursor: "pointer",
-                    flexShrink: 0,
-                  }}
-                  aria-label={c}
-                />
-              ))}
+            <div className="control-group">
+              <span>rule-style:</span>
+              <select
+                id="gd-style"
+                value={ruleStyle}
+                onChange={(e) => setRuleStyle(e.target.value)}
+              >
+                <option value="solid">solid</option>
+                <option value="dashed">dashed</option>
+                <option value="dotted">dotted</option>
+                <option value="double">double</option>
+              </select>
             </div>
 
-            <label>show:</label>
-            <label
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "4px",
-                cursor: "pointer",
-                fontWeight: "normal",
-              }}
-            >
+            <div className="control-group">
+              <span>rule-width:</span>
               <input
-                type="checkbox"
-                checked={showColRule}
-                onChange={(e) => setShowColRule(e.target.checked)}
+                id="gd-width"
+                type="range"
+                min="1"
+                max="6"
+                value={ruleWidth}
+                onChange={(e) => setRuleWidth(Number(e.target.value))}
               />
-              column-rule
-            </label>
-            {layout === "grid" && (
+              <span className="val">{ruleWidth}px</span>
+            </div>
+
+            <div className="control-group">
+              <span>rule-color:</span>
+              <div
+                style={{ display: "flex", gap: "6px", alignItems: "center" }}
+              >
+                {colors.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setRuleColor(c)}
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: "50%",
+                      background: c,
+                      border:
+                        ruleColor === c
+                          ? "2px solid white"
+                          : "2px solid transparent",
+                      cursor: "pointer",
+                      flexShrink: 0,
+                    }}
+                    aria-label={c}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="control-group">
+              <span>show:</span>
               <label
                 style={{
                   display: "flex",
@@ -207,12 +198,32 @@ export function CssGapRulesDemo() {
               >
                 <input
                   type="checkbox"
-                  checked={showRowRule}
-                  onChange={(e) => setShowRowRule(e.target.checked)}
+                  checked={showColRule}
+                  onChange={(e) => setShowColRule(e.target.checked)}
                 />
-                row-rule
+
+                <span>column-rule</span>
+
               </label>
-            )}
+              {layout === "grid" && (
+                <label
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                    cursor: "pointer",
+                    fontWeight: "normal",
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={showRowRule}
+                    onChange={(e) => setShowRowRule(e.target.checked)}
+                  />
+                  <span>row-rule</span>
+                </label>
+              )}
+            </div>
           </div>
 
           <div className="preview" style={{ overflowX: "auto" }}>
@@ -256,10 +267,10 @@ export function CssGapRulesDemo() {
       {(() => {
         // Each "step" in the repeat pattern is a full rule: width style color
         const [steps, setSteps] = useState([
-          { width: 1, style: "dashed", color: "#a855f7" },
-          { width: 5, style: "dashed", color: "#a855f7" },
+          { id: 1, width: 1, style: "dashed", color: "#a855f7" },
+          { id: 2, width: 5, style: "dashed", color: "#a855f7" },
         ]);
-        const [repeatCount, setRepeatCount] = useState<"auto" | number>("auto");
+        const [repeatCount] = useState<"auto" | number>("auto");
         const [axis, setAxis] = useState<"column" | "row" | "both">("column");
         const [numCols, setNumCols] = useState(5);
         const [numRows, setNumRows] = useState(3);
@@ -269,12 +280,21 @@ export function CssGapRulesDemo() {
           .join(", ");
         const repeatVal = `repeat(${repeatCount}, ${stepsStr})`;
 
+        const columnRule =
+          axis === "column" || axis === "both"
+            ? `  column-rule: ${repeatVal};\n`
+            : "";
+        const rowRule =
+          axis === "row" || axis === "both"
+            ? `  row-rule: ${repeatVal};\n`
+            : "";
+
         const ex2Code = `.grid {
   display: grid;
   grid-template-columns: repeat(${numCols}, 1fr);
   grid-template-rows: repeat(${numRows}, 1fr);
   gap: 1rem;
-${axis === "column" || axis === "both" ? `  column-rule: ${repeatVal};\n` : ""}${axis === "row" || axis === "both" ? `  row-rule: ${repeatVal};\n` : ""}}`;
+${columnRule}${rowRule}}`;
 
         const updateStep = (i: number, key: string, value: string | number) =>
           setSteps((prev) =>
@@ -285,6 +305,7 @@ ${axis === "column" || axis === "both" ? `  column-rule: ${repeatVal};\n` : ""}$
           setSteps((prev) => [
             ...prev,
             {
+              id: prev.length ? Math.max(...prev.map((step) => step.id)) + 1 : 1,
               width: 1,
               style: "solid",
               color: PALETTE[prev.length % PALETTE.length],
@@ -332,7 +353,7 @@ ${axis === "column" || axis === "both" ? `  column-rule: ${repeatVal};\n` : ""}$
                 >
                   {steps.map((step, i) => (
                     <div
-                      key={i}
+                      key={step.id}
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -364,7 +385,7 @@ ${axis === "column" || axis === "both" ? `  column-rule: ${repeatVal};\n` : ""}$
                           gap: "0.4rem",
                         }}
                       >
-                        width
+                        <span>width</span>
                         <input
                           type="range"
                           min="1"
@@ -395,7 +416,7 @@ ${axis === "column" || axis === "both" ? `  column-rule: ${repeatVal};\n` : ""}$
                           gap: "0.4rem",
                         }}
                       >
-                        style
+                        <span>style</span>
                         <select
                           value={step.style}
                           onChange={(e) =>
@@ -794,12 +815,7 @@ ${axis === "column" || axis === "both" ? `  column-rule: ${repeatVal};\n` : ""}$
             <div className="note">
               <span className="icon">💡</span>
               <span>
-                <strong>rule-break</strong> controls what happens where column
-                and row rules cross.
-                <code>none</code> paints them straight through;{" "}
-                <code>intersection</code> breaks each line at every crossing.
-                You need both <code>column-rule</code> and <code>row-rule</code>
-                set for the effect to be visible.
+                <strong>rule-break</strong> controls what happens where column and row rules cross. <code>none</code> paints them straight through; <code>intersection</code> breaks each line at every crossing. You need both <code>column-rule</code> and <code>row-rule</code> set for the effect to be visible.
               </span>
             </div>
           </ComponentPreview>
@@ -887,7 +903,7 @@ ${axis === "column" || axis === "both" ? `  column-rule: ${repeatVal};\n` : ""}$
                     checked={overlapJoin}
                     onChange={(e) => setOverlapJoin(e.target.checked)}
                   />
-                  overlap-join
+                  <span>overlap-join</span>
                 </label>
               </div>
 
@@ -941,20 +957,12 @@ ${axis === "column" || axis === "both" ? `  column-rule: ${repeatVal};\n` : ""}$
             <div className="note">
               <span className="icon">💡</span>
               <span>
-                <strong>rule-inset</strong> is the shorthand for trimming all
-                segments inward. <strong>rule-inset-cap</strong> controls the
-                inset at container edges (no crossing there), and{" "}
-                <strong>rule-inset-junction</strong> controls it at crossing
-                points. Setting
-                <code>cap: 0px</code> with <code>junction: 12px</code> keeps
-                lines flush at the edges but opens space around each crossing.
-                Since these are animatable, collapsing the junction to zero on
-                hover makes a satisfying micro-interaction.
+                <strong>rule-inset</strong> is the shorthand for trimming all segments inward. <strong>rule-inset-cap</strong> controls the inset at container edges (no crossing there), and{" "} <strong>rule-inset-junction</strong> controls it at crossing points. Setting <code>cap: 0px</code> with <code>junction: 12px</code> keeps lines flush at the edges but opens space around each crossing. Since these are animatable, collapsing the junction to zero on hover makes a satisfying micro-interaction.
               </span>
             </div>
           </ComponentPreview>
-        );
-      })()}
+        ); 
+        })()}
 
       <CssGapRuleVisibilityDemo />
       <CssGapDecorationsShelfDemo />

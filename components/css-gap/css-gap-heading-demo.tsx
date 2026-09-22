@@ -46,7 +46,7 @@ h1::after {
       {/* Section label */}
       <div className="section-label">
         <h2>Heading with gap decoration</h2>
-        <span className="badge badge-orange">Chrome 149+ (flag)</span>
+        <span className="badge badge-orange">Chrome 149+</span>
       </div>
 
       <div className="demo-wrap">
@@ -209,7 +209,7 @@ h1::after {
       {/* Section label */}
       <div className="section-label">
         <h2>Heading with side lines</h2>
-        <span className="badge badge-orange">Chrome 149+ (flag)</span>
+        <span className="badge badge-orange">Chrome 149+</span>
       </div>
 
       <div className="demo-wrap">

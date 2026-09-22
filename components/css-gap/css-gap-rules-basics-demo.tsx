@@ -79,6 +79,7 @@ export function CssGapRulesBasicsDemo() {
 
       <div className="demo-wrap">
         <div className="controls">
+          <div className="control-group">
           <label htmlFor="gd-layout">layout:</label>
           <select
             id="gd-layout"
@@ -88,9 +89,9 @@ export function CssGapRulesBasicsDemo() {
             <option value="grid">display: grid</option>
             <option value="flex">display: flex</option>
           </select>
-
+</div>
           {layout === "grid" && (
-            <>
+            <div className="control-group">
               <label htmlFor="gd-cols">columns:</label>
               <select
                 id="gd-cols"
@@ -101,9 +102,9 @@ export function CssGapRulesBasicsDemo() {
                 <option value={3}>3</option>
                 <option value={4}>4</option>
               </select>
-            </>
+            </div>
           )}
-
+<div className="control-group">
           <label htmlFor="gd-style">rule-style:</label>
           <select
             id="gd-style"
@@ -114,7 +115,8 @@ export function CssGapRulesBasicsDemo() {
               <option key={s} value={s}>{s}</option>
             ))}
           </select>
-
+</div>
+<div className="control-group">
           <label htmlFor="gd-width">rule-width:</label>
           <input
             id="gd-width"
@@ -125,8 +127,10 @@ export function CssGapRulesBasicsDemo() {
             onChange={(e) => setRuleWidth(Number(e.target.value))}
           />
           <span className="val">{ruleWidth}px</span>
+</div>
+<div className="control-group">
 
-          <label>rule-color:</label>
+          <span>rule-color:</span>
           <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
             {COLORS.map((c) => (
               <button
@@ -145,15 +149,16 @@ export function CssGapRulesBasicsDemo() {
               />
             ))}
           </div>
-
-          <label>show:</label>
+          </div>
+<div className="control-group">
+          <span>show:</span>
           <label style={{ display: "flex", alignItems: "center", gap: "4px", cursor: "pointer", fontWeight: "normal" }}>
             <input
               type="checkbox"
               checked={showColRule}
               onChange={(e) => setShowColRule(e.target.checked)}
             />
-            column-rule
+            <span>column-rule</span>
           </label>
           {layout === "grid" && (
             <label style={{ display: "flex", alignItems: "center", gap: "4px", cursor: "pointer", fontWeight: "normal" }}>
@@ -162,9 +167,10 @@ export function CssGapRulesBasicsDemo() {
                 checked={showRowRule}
                 onChange={(e) => setShowRowRule(e.target.checked)}
               />
-              row-rule
+              <span>row-rule</span>
             </label>
           )}
+          </div>
         </div>
 
         <div className="preview" style={{ overflowX: "auto" }}>
