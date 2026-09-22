@@ -2,8 +2,6 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -39,6 +37,10 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+  --neon: oklch(0.64 0.19 162);
+  --neon-soft: oklch(0.64 0.21 162 / 0.6);
+  --neon-faint: oklch(0.64 0.21 162 / 0.32);
+  --neon-track: oklch(0.64 0.05 162 / 0.25);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -82,6 +84,19 @@
   --sidebar-accent-foreground: oklch(0.38 0.09 162);
   --sidebar-border: oklch(0.915 0.005 240);
   --sidebar-ring: oklch(0.56 0.12 162);
+    --font-size-h1: clamp(2rem, 3vw, 2.75rem);
+  --font-size-h2: clamp(1.45rem, 2.1vw, 1.85rem);
+  --font-size-h3: clamp(1.15rem, 1.65vw, 1.35rem);
+  --font-size-h4: 1.1rem;
+  --font-size-h5: 1rem;
+  --font-size-h6: 0.95rem;
+  --font-size-body: 1rem;
+  --font-size-body-lg: 1.05rem;
+  --font-size-note: 0.95rem;
+  --line-height-heading: 1.2;
+  --line-height-body: 1.65;
+  --line-height-note: 1.5;
+  --font-weight-heading: 600;
 }
 
 .dark {
@@ -110,26 +125,26 @@
   --chart-4: oklch(0.6 0.09 250);
   --chart-5: oklch(0.6 0.09 30);
   --sidebar: oklch(0.2 0.011 240);
-  --sidebar-foreground: oklch(0.965 0.003 240);
+  --sidebar-foreground: #e6e8ef;
   --sidebar-primary: oklch(0.72 0.13 162);
   --sidebar-primary-foreground: oklch(0.185 0.02 162);
   --sidebar-accent: oklch(0.3 0.04 162);
   --sidebar-accent-foreground: oklch(0.9 0.06 162);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.72 0.13 162);
+   --neon: oklch(0.84 0.21 162);
+  --neon-soft: oklch(0.84 0.24 162 / 0.7);
+  --neon-faint: oklch(0.84 0.24 162 / 0.4);
+  --neon-track: oklch(0.84 0.08 162 / 0.22);
 }
 
                          /* comment */
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   html {
     font-size: 17px;
   }
   body {
-    @apply bg-background text-foreground;
     font-family: var(--font-sans);
     font-size: var(--font-size-body);
     line-height: var(--line-height-body);
@@ -183,22 +198,6 @@
     font-family: var(--font-mono);
     font-size: 0.92em;
   }
-}
-
-:root {
-  --font-size-h1: clamp(2rem, 3vw, 2.75rem);
-  --font-size-h2: clamp(1.45rem, 2.1vw, 1.85rem);
-  --font-size-h3: clamp(1.15rem, 1.65vw, 1.35rem);
-  --font-size-h4: 1.1rem;
-  --font-size-h5: 1rem;
-  --font-size-h6: 0.95rem;
-  --font-size-body: 1rem;
-  --font-size-body-lg: 1.05rem;
-  --font-size-note: 0.95rem;
-  --line-height-heading: 1.2;
-  --line-height-body: 1.65;
-  --line-height-note: 1.5;
-  --font-weight-heading: 600;
 }
 
 .eyebrow,
@@ -316,13 +315,18 @@
 
   /* Controls bar */
   .controls {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
     background: #111;
+    column-rule: 1px dashed var(--border);
+    row-rule: 1px dashed var(--border);
+    rule-visibility-items: between;
+    rule-inset-cap: 0px;
+    rule-inset-junction: -20px; 
   }
   .controls label {
     font-size: 0.8rem;
@@ -335,17 +339,24 @@
     border: 1px solid #333;
     color: var(--white);
     border-radius: 4px;
-    padding: 0.25rem 0.5rem;
+    padding: 10px 15px;
     font-family: inherit;
     font-size: 0.8rem;
     cursor: pointer;
   }
+
+  .controls select option {
+    padding: 10px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+
   .controls input[type=range] { padding: 0; width: 90px; accent-color: var(--red); }
   .controls span.val { font-size: 0.75rem; color: var(--light); min-width: 2.5rem; }
 
   /* The actual preview area */
   .preview {
-    padding: 1.25rem;
+    padding: 60px 1.25rem;
     max-height: 420px;
     overflow: auto;
     /* subtle scrollbar */
@@ -412,26 +423,29 @@
   }
   .note .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
 
-  button.active {
-  border-color: var(--primary);
-  border-width: 3px;
-}
+  button {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
 
-/* ── Neon effect for interactive controls ─────────────────────── */
-/* Emerald neon derived from the primary hue, tuned per theme.     */
-:root {
-  --neon: oklch(0.64 0.19 162);
-  --neon-soft: oklch(0.64 0.21 162 / 0.6);
-  --neon-faint: oklch(0.64 0.21 162 / 0.32);
-  --neon-track: oklch(0.64 0.05 162 / 0.25);
-}
+  button.active,
+  button.input.active {
+    color: var(--neon);
+    text-shadow: 0 0 .5rem var(--neon-soft);
+    box-shadow: inset 0 0 0 1px var(--neon-faint), 0 0 .75rem var(--neon-faint);
+    border-color: var(--neon);
+  }
 
-.dark {
-  --neon: oklch(0.84 0.21 162);
-  --neon-soft: oklch(0.84 0.24 162 / 0.7);
-  --neon-faint: oklch(0.84 0.24 162 / 0.4);
-  --neon-track: oklch(0.84 0.08 162 / 0.22);
-}
+  button.input {
+    background-color: 
+color-mix(in oklab, var(--input) 30%, transparent);
+    padding-inline: calc(var(--spacing) * 3.5);
+    background-clip: padding-box;
+    border: 1px solid var(--input);
+    border-radius: var(--radius);
+    height: calc(var(--spacing) * 10);
+    margin-inline-end: var(--spacing);
+  }
 
 @media (prefers-reduced-motion: no-preference) {
   [data-slot='button'],
@@ -456,11 +470,11 @@
     0 0 1.25rem var(--neon-soft);
 }
 
-/* Text-like variants shouldn't carry a box glow */
+/* Text-like variants shouldn't carry a box glow
 [data-slot='button'][class*='underline-offset'],
 [data-slot='button'][class*='underline-offset']:hover {
   box-shadow: none;
-}
+} */
 
 /* Text inputs, selects, textareas */
 input[type='text'],
@@ -567,6 +581,12 @@ input[type='checkbox']:focus-visible {
     0 0 0.75rem var(--neon-soft);
 }
 
+select,
+select::picker(select) {
+  appearance: base-select;
+}
+
+
 /* ── Neon nav links, badges & links ───────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
   .nav-link,
@@ -622,4 +642,54 @@ input[type='checkbox']:focus-visible {
   box-shadow:
     0 0 0.5rem var(--neon-soft),
     0 0 1.25rem var(--neon-faint);
+}
+
+.control-group{
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  label:has(input[type='color']) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.75rem;
+  background: #0a0a0a;
+  border: 1px solid #1e1e1e;
+  border-left: 3px solid var(--border);
+  border-radius: 6;
+
+  .step-label {
+    color: var(--secondary-foreground);
+    font-size: 0.75rem;
+  }
+
+  .remove-step {
+    background: none;
+    color: var(--secondary-foreground);
+    padding: 0.35rem 0.75rem;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .controls {
+    flex-grow: 1;
+    padding: 5px;
+  }
+}
+
+input[type='text'] {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  background: var(--input);
+  color: var(--foreground);
 }

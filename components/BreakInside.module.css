@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-block: 2rem;
 }
 
 .titleRow {
@@ -88,7 +89,7 @@
   line-height: 1.4;
   min-height: 2.4em;
 }
-
+/* 
 .buttonRow {
   display: flex;
   gap: 0.35rem;
@@ -115,7 +116,7 @@
   border-color: oklch(65% 0.18 270 / 0.6);
   background: oklch(65% 0.18 270 / 0.1);
   color: oklch(75% 0.18 270);
-}
+} */
 
 /* ─── Preview ────────────────────────────────────────────────────────────── */
 

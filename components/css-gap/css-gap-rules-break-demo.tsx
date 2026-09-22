@@ -34,6 +34,7 @@ export function CssGapRulesBreakDemo() {
 
       <div className="demo-wrap">
         <div className="controls">
+          <div className="control-group">
           <label htmlFor="ex3-break">rule-break:</label>
           <select
             id="ex3-break"
@@ -43,6 +44,7 @@ export function CssGapRulesBreakDemo() {
             <option value="none">none — lines cross through each other</option>
             <option value="intersection">intersection — lines break at each crossing</option>
           </select>
+          </div>
         </div>
 
         <div className="preview" style={{ overflowX: "auto" }}>
@@ -78,7 +80,7 @@ export function CssGapRulesBreakDemo() {
         </div>
 
         {/* Side-by-side comparison */}
-        <div style={{ marginTop: "1.5rem" }}>
+        <div style={{ margin: "1.5rem" }}>
           <p style={{ margin: "0 0 0.75rem", fontSize: "0.75rem", color: "#666" }}>Both values compared:</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem" }}>
             {(["none", "intersection"] as const).map((val) => (
