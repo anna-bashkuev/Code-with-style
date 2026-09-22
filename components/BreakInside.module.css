@@ -122,7 +122,7 @@
 
 .preview {
   position: relative;
-  border: 1px solid #1e1e1e;
+  border: 1px solid #3a3a3a;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -138,7 +138,7 @@
 }
 
 .columnGuide {
-  border-right: 1px dashed #1a1a1a;
+  border-right: 1px dashed #3a3a3a;
   display: flex;
   align-items: flex-start;
   padding: 0.5rem 0.5rem 0;
@@ -150,7 +150,7 @@
 
 .columnLabel {
   font-size: 0.6rem;
-  color: #2a2a2a;
+  color: #8a94a6;
   font-family: "JetBrains Mono", monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -169,7 +169,7 @@
 .card {
   break-inside: avoid; /* default: keep individual cards intact */
   background: #0d0d0d;
-  border: 1px solid #1e1e1e;
+  border: 1px solid #3a3a3a;
   border-radius: 8px;
   padding: 1rem 1.1rem;
   margin-bottom: 1rem;
