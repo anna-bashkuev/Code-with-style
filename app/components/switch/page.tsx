@@ -9,8 +9,17 @@ export const metadata: Metadata = {
   title: "Switch",
 }
 
-const cssSource = `/* Strip the native look so we can draw our own track */
-input[type="checkbox"] {
+const cssSource = `/* The label wraps the checkbox and its text */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+/* Strip the native look so we can draw our own track */
+.switch input[type="checkbox"] {
+  position: relative;
   appearance: none;
   width: 3rem;
   height: 1.6rem;
@@ -21,7 +30,7 @@ input[type="checkbox"] {
 }
 
 /* The knob */
-input[type="checkbox"]::before {
+.switch input[type="checkbox"]::before {
   content: "";
   position: absolute;
   inset-block: 0.18rem;
@@ -33,21 +42,58 @@ input[type="checkbox"]::before {
 }
 
 /* Checked track */
-input[type="checkbox"]:checked {
+.switch input[type="checkbox"]:checked {
   background: var(--neon);
   border-color: var(--neon);
 }
 
 /* Slide the knob across when checked */
-input[type="checkbox"]:checked::before {
+.switch input[type="checkbox"]:checked::before {
   transform: translateX(1.4rem);
 }
 
 /* Keyboard focus outline */
-input[type="checkbox"]:focus-visible {
+.switch input[type="checkbox"]:focus-visible {
   outline: 2px solid var(--neon);
   outline-offset: 2px;
+}
+
+/* Non-interactive state */
+.switch input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }`
+
+const statesHtml = `<label class="switch">
+  <input type="checkbox" />
+  <span>Off by default</span>
+</label>
+<label class="switch">
+  <input type="checkbox" checked />
+  <span>On by default</span>
+</label>`
+
+const settingsHtml = `<label class="switch">
+  <input type="checkbox" checked />
+  <span>Wi-Fi</span>
+</label>
+<label class="switch">
+  <input type="checkbox" />
+  <span>Bluetooth</span>
+</label>
+<label class="switch">
+  <input type="checkbox" checked />
+  <span>Airplane mode</span>
+</label>`
+
+const disabledHtml = `<label class="switch">
+  <input type="checkbox" disabled />
+  <span>Disabled off</span>
+</label>
+<label class="switch">
+  <input type="checkbox" checked disabled />
+  <span>Disabled on</span>
+</label>`
 
 export default function SwitchPage() {
   return (
@@ -62,7 +108,8 @@ export default function SwitchPage() {
         <ComponentPreview
           title="States"
           description="The switch reflects its checked state with a neon track and a sliding knob."
-          code={cssSource}
+          html={statesHtml}
+          css={cssSource}
         >
           <div className={styles.group}>
             <label className={styles.switch}>
@@ -79,18 +126,8 @@ export default function SwitchPage() {
         <ComponentPreview
           title="Settings list"
           description="Switches line up naturally beside their labels for a settings-style layout."
-          code={`<label class="switch">
-  <input type="checkbox" checked />
-  <span>Wi-Fi</span>
-</label>
-<label class="switch">
-  <input type="checkbox" />
-  <span>Bluetooth</span>
-</label>
-<label class="switch">
-  <input type="checkbox" checked />
-  <span>Airplane mode</span>
-</label>`}
+          html={settingsHtml}
+          css={cssSource}
         >
           <div className={styles.group}>
             <label className={styles.switch}>
@@ -111,14 +148,8 @@ export default function SwitchPage() {
         <ComponentPreview
           title="Disabled"
           description="Non-interactive states use reduced opacity while keeping the on/off distinction."
-          code={`<label class="switch">
-  <input type="checkbox" disabled />
-  <span>Disabled off</span>
-</label>
-<label class="switch">
-  <input type="checkbox" checked disabled />
-  <span>Disabled on</span>
-</label>`}
+          html={disabledHtml}
+          css={cssSource}
         >
           <div className={styles.group}>
             <label className={styles.switch}>
