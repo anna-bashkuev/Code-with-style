@@ -104,6 +104,32 @@ export default function SwitchPage() {
         description="A toggle switch built from a single native checkbox, styled entirely with modern CSS — appearance: none, a ::before knob, and the :checked and :focus-visible states. No JavaScript required."
       />
 
+      <aside className="mt-8 flex gap-3 rounded-md border border-border bg-muted/40 p-4">
+        <span aria-hidden="true" className="mt-0.5 text-[color:var(--neon)]">
+          {"//"}
+        </span>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          Heads up: there is now a native{" "}
+          <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[color:var(--neon)]">
+            switch
+          </code>{" "}
+          attribute for checkboxes —{" "}
+          <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-foreground">
+            {'<input type="checkbox" switch />'}
+          </code>{" "}
+          renders a real toggle with no custom CSS. It is not yet{" "}
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#switch"
+            target="_blank"
+            rel="noreferrer"
+            className="text-foreground underline underline-offset-2 hover:text-[color:var(--neon)]"
+          >
+            Baseline
+          </a>
+          , so check current browser support before using it in production. The examples below use the CSS approach, which works everywhere today.
+        </p>
+      </aside>
+
       <div className="mt-10 flex flex-col gap-12">
         <ComponentPreview
           title="States"
