@@ -42,7 +42,8 @@ export const navSections: NavSection[] = [
     description:
       "The starting point — foundational interactive elements styled entirely with modern CSS.",
     items: [
-      { title: "Example", href: "/components/buttons" },
+      { title: "Buttons", href: "/components/buttons" },
+      { title: "Switch", href: "/components/switch" },
     ],
   },
   {
