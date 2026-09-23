@@ -1,0 +1,231 @@
+/* Pure-CSS scroll snapping — no JavaScript.
+   The scroll container declares scroll-snap-type; each child
+   declares scroll-snap-align to define where scrolling comes to rest. */
+
+/* ---- Horizontal gallery ---- */
+.gallery {
+  display: flex;
+  gap: 1rem;
+  padding: 0.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slide {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  flex: 0 0 min(20rem, 80%);
+  height: 14rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(to top, color-mix(in oklab, var(--background) 92%, transparent), transparent),
+    var(--muted);
+  color: var(--foreground);
+}
+
+.slideIndex {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neon);
+}
+
+.slideTitle {
+  margin-top: 0.35rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.slideText {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: color-mix(in oklab, var(--foreground) 70%, transparent);
+}
+
+/* ---- Vertical section snap ---- */
+.viewport {
+  height: 22rem;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon) transparent;
+}
+
+.panel {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  height: 22rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+}
+
+.panel:nth-child(odd) {
+  background: var(--muted);
+}
+
+.panelKicker {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neon);
+}
+
+.panelTitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.panelText {
+  max-width: 32ch;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--foreground) 70%, transparent);
+}
+
+.hint {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: color-mix(in oklab, var(--foreground) 55%, transparent);
+}
+
+/* ---- CSS-only carousel (::scroll-button + ::scroll-marker) ---- */
+/* Prev/next buttons and dot markers generated entirely by the browser.
+   No JavaScript, no state — the scroll container owns everything. */
+.carousel {
+  display: flex;
+  gap: 1rem;
+  padding: 0.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* Reserve room below the track for the generated marker dots */
+  anchor-name: --carousel;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carouselSlide {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  flex: 0 0 100%;
+  height: 16rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(to top, color-mix(in oklab, var(--background) 88%, transparent), transparent),
+    var(--muted);
+  color: var(--foreground);
+}
+
+/* Generated prev/next buttons */
+.carousel::scroll-button(left),
+.carousel::scroll-button(right) {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--background) 80%, transparent);
+  color: var(--foreground);
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.carousel::scroll-button(left) {
+  content: "\2039";
+  left: 0.75rem;
+}
+
+.carousel::scroll-button(right) {
+  content: "\203A";
+  right: 0.75rem;
+}
+
+.carousel::scroll-button(left):hover,
+.carousel::scroll-button(right):hover {
+  border-color: var(--neon);
+  background: color-mix(in oklab, var(--neon) 18%, var(--background));
+}
+
+/* Disabled at the start/end of the track */
+.carousel::scroll-button(left):disabled,
+.carousel::scroll-button(right):disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.carousel::scroll-button(left):focus-visible,
+.carousel::scroll-button(right):focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 2px;
+}
+
+/* Generated dot markers */
+.carousel {
+  scroll-marker-group: after;
+}
+
+.carousel::scroll-marker-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0 0.25rem;
+}
+
+.carouselSlide::scroll-marker {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--foreground) 40%, transparent);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.carouselSlide::scroll-marker:hover {
+  border-color: var(--neon);
+}
+
+/* The marker for the slide currently in view */
+.carouselSlide::scroll-marker:target-current {
+  background: var(--neon);
+  border-color: var(--neon);
+}
+
+.carouselWrap {
+  position: relative;
+}
