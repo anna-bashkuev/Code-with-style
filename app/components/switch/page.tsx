@@ -104,11 +104,11 @@ export default function SwitchPage() {
         description="A toggle switch built from a single native checkbox, styled entirely with modern CSS — appearance: none, a ::before knob, and the :checked and :focus-visible states. No JavaScript required."
       />
 
-      <aside className="mt-8 flex gap-3 rounded-md border border-border bg-muted/40 p-4">
-        <span aria-hidden="true" className="mt-0.5 text-[color:var(--neon)]">
+      <aside className="mt-8 flex gap-3 rounded-md border border-yellow-500/40 bg-yellow-500/10 p-4">
+        <span aria-hidden="true" className="mt-0.5 text-yellow-500">
           {"//"}
         </span>
-        <p className="text-sm leading-relaxed text-muted-foreground">
+        <p className="text-sm leading-relaxed text-yellow-100/90">
           Heads up: there is now a native{" "}
           <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[color:var(--neon)]">
             switch
