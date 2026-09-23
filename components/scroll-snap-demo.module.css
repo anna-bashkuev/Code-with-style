@@ -1,0 +1,108 @@
+/* Pure-CSS scroll snapping — no JavaScript.
+   The scroll container declares scroll-snap-type; each child
+   declares scroll-snap-align to define where scrolling comes to rest. */
+
+/* ---- Horizontal gallery ---- */
+.gallery {
+  display: flex;
+  gap: 1rem;
+  padding: 0.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slide {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  flex: 0 0 min(20rem, 80%);
+  height: 14rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(to top, color-mix(in oklab, var(--background) 92%, transparent), transparent),
+    var(--muted);
+  color: var(--foreground);
+}
+
+.slideIndex {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neon);
+}
+
+.slideTitle {
+  margin-top: 0.35rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.slideText {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: color-mix(in oklab, var(--foreground) 70%, transparent);
+}
+
+/* ---- Vertical section snap ---- */
+.viewport {
+  height: 22rem;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon) transparent;
+}
+
+.panel {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  height: 22rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+}
+
+.panel:nth-child(odd) {
+  background: var(--muted);
+}
+
+.panelKicker {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neon);
+}
+
+.panelTitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.panelText {
+  max-width: 32ch;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--foreground) 70%, transparent);
+}
+
+.hint {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: color-mix(in oklab, var(--foreground) 55%, transparent);
+}

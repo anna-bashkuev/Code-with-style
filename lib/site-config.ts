@@ -44,6 +44,7 @@ export const navSections: NavSection[] = [
     items: [
       { title: "Buttons", href: "/components/buttons" },
       { title: "Switch", href: "/components/switch" },
+      { title: "Scroll Snap", href: "/components/scroll-snap" },
     ],
   },
   {
