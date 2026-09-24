@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/page-header"
 import { PageNav } from "@/components/page-nav"
 import { PageShell } from "@/components/page-shell"
 import { ComponentPreview } from "@/components/component-preview"
+import { GsapInfiniteCards } from "@/components/gsap-infinite-cards"
 import styles from "@/components/scroll-snap-demo.module.css"
 
 export const metadata: Metadata = {
@@ -143,6 +144,33 @@ const panels = [
   },
 ]
 
+const infiniteCardsCode = `gsap.registerPlugin(ScrollTrigger);
+
+const spacing = 0.1,
+  snap = gsap.utils.snap(spacing),
+  cards = gsap.utils.toArray('.cards li'),
+  seamlessLoop = buildSeamlessLoop(cards, spacing),
+  scrub = gsap.to(seamlessLoop, {
+    totalTime: 0, duration: 0.5, ease: "power3", paused: true
+  }),
+  trigger = ScrollTrigger.create({
+    start: 0, end: "+=3000", pin: ".gallery",
+    onUpdate(self) {
+      if (self.progress === 1 && self.direction > 0 && !self.wrapping) {
+        wrapForward(self);
+      } else if (self.progress < 1e-5 && self.direction < 0 && !self.wrapping) {
+        wrapBackward(self);
+      } else {
+        scrub.vars.totalTime = snap((iteration + self.progress) * seamlessLoop.duration());
+        scrub.invalidate().restart();
+        self.wrapping = false;
+      }
+    }
+  });
+
+// Each card fades/scales in, then travels across the stage. Extra copies at
+// the ends make the wrap from last to first (and back) completely seamless.`
+
 export default function ScrollSnapPage() {
   return (
     <PageShell>
@@ -229,6 +257,14 @@ export default function ScrollSnapPage() {
               Keep scrolling ↑↓
             </p>
           </div>
+        </ComponentPreview>
+
+        <ComponentPreview
+          title="Infinite cards with GSAP (continuous snap)"
+          description="Snapping doesn't have to be CSS-only. This GreenSock port scrubs a seamless, looping card animation from the scroll position — scroll inside the frame or use Prev/Next. It snaps to one card at a time, then wraps endlessly in both directions."
+          code={infiniteCardsCode}
+        >
+          <GsapInfiniteCards />
         </ComponentPreview>
       </div>
 
