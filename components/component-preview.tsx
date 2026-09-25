@@ -16,6 +16,8 @@ type ComponentPreviewProps = {
   html?: string
   /** CSS shown under the "Code" tab's CSS sub-tab. */
   css?: string
+  /** JavaScript shown under the "Code" tab's JS sub-tab. */
+  js?: string
   /** Extra classes for the preview canvas (e.g. layout of examples). */
   className?: string
 }
@@ -27,12 +29,14 @@ export function ComponentPreview({
   code,
   html,
   css,
+  js,
   className,
 }: ComponentPreviewProps) {
   const languages = [
     html !== undefined ? ({ key: "html", label: "HTML", source: html } as const) : null,
     css !== undefined ? ({ key: "css", label: "CSS", source: css } as const) : null,
-    css === undefined && html === undefined && code !== undefined
+    js !== undefined ? ({ key: "js", label: "JS", source: js } as const) : null,
+    css === undefined && html === undefined && js === undefined && code !== undefined
       ? ({ key: "code", label: "Code", source: code } as const)
       : null,
   ].filter((entry): entry is { key: string; label: string; source: string } => entry !== null)
