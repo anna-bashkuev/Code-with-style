@@ -162,44 +162,20 @@ const infiniteCardsCss = `/* The track does the snapping, momentum + easing — 
   transition: transform 0.1s linear;
 }`
 
-const infiniteCardsCode = `// Render the cards 3x so there are always clones on both sides.
-const SETS = 3;
-const track = el.querySelector(".track");
-const items = [...track.querySelectorAll("li")];
-const setWidth = () => track.scrollWidth / SETS;
+const infiniteCardsHtml = `<!-- Render one set of cards. The JS clones this set 3x at runtime
+     so there are always neighbours to scroll into on both sides. -->
+<ul class="track">
+  <li class="card"><span class="num">01</span><span class="label">snap</span></li>
+  <li class="card"><span class="num">02</span><span class="label">loop</span></li>
+  <li class="card"><span class="num">03</span><span class="label">center</span></li>
+  <li class="card"><span class="num">04</span><span class="label">scrub</span></li>
+  <li class="card"><span class="num">05</span><span class="label">wrap</span></li>
+</ul>
 
-// Start in the middle set so we can wrap either direction.
-track.scrollLeft = setWidth();
-
-function update() {
-  const set = setWidth();
-
-  // Seamless wrap: drifted into an outer set? jump back exactly one set.
-  // The snapped card sits at an identical offset, so it never visibly moves.
-  if (track.scrollLeft < set * 0.5) track.scrollLeft += set;
-  else if (track.scrollLeft > set * 1.5) track.scrollLeft -= set;
-
-  // Scale + light up whichever card is nearest the horizontal center.
-  const center = track.scrollLeft + track.clientWidth / 2;
-  for (const item of items) {
-    const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-    const dist = Math.abs(center - itemCenter);
-    const proximity = Math.max(0, 1 - dist / (item.offsetWidth * 1.6));
-    item.style.setProperty("--scale", (0.7 + proximity * 0.3).toFixed(3));
-    item.style.setProperty("--active", proximity.toFixed(3));
-  }
-}
-
-// rAF-throttle the scroll handler; snap does the resting + easing for free.
-let frame = 0;
-track.addEventListener("scroll", () => {
-  if (!frame) frame = requestAnimationFrame(() => { frame = 0; update(); });
-}, { passive: true });
-
-// Prev / Next just nudge the same scroll container by one card.
-const step = () => items[0].offsetWidth + 16;
-prevBtn.onclick = () => track.scrollBy({ left: -step(), behavior: "smooth" });
-nextBtn.onclick = () => track.scrollBy({ left:  step(), behavior: "smooth" });`
+<div class="actions">
+  <button type="button" data-dir="prev">Prev</button>
+  <button type="button" data-dir="next">Next</button>
+</div>`
 
 export default function ScrollSnapPage() {
   return (
@@ -292,7 +268,7 @@ export default function ScrollSnapPage() {
         <ComponentPreview
           title="Infinite cards (scroll-snap + vanilla JS)"
           description="No animation library — CSS scroll-snap handles the snapping, momentum, and easing. A little vanilla JS makes the loop seamless (jump by one set at the clones) and scales the centered card. Scroll sideways or use Prev/Next; it wraps endlessly in both directions."
-          code={infiniteCardsCode}
+          html={infiniteCardsHtml}
           css={infiniteCardsCss}
         >
           <InfiniteCards />
