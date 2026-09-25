@@ -1,0 +1,215 @@
+/* Plugin-free rebuild of jh3y's styleable <select> (CodePen ByNgvBZ).
+   No GSAP, no tweakpane, no experimental ::picker() — just CSS + vanilla JS. */
+
+.stage {
+  --row: 2.5rem;
+  --rows: 7;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 24rem;
+  padding: 2rem 0;
+  /* faint grid backdrop, echoing the original */
+  background-image:
+    linear-gradient(90deg, var(--neon-track) 1px, transparent 1px 45px),
+    linear-gradient(var(--neon-track) 1px, transparent 1px 45px);
+  background-size: 45px 45px;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(120% 120% at 50% 50%, #000 30%, transparent 75%);
+          mask-image: radial-gradient(120% 120% at 50% 50%, #000 30%, transparent 75%);
+  border-radius: 0.75rem;
+}
+
+.phrase {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 1rem + 3vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.lead,
+.trail {
+  transition:
+    opacity 0.3s ease,
+    translate 0.3s ease;
+}
+
+/* dim the surrounding words while the picker is open */
+.phrase:has([data-open='true']) .lead,
+.phrase:has([data-open='true']) .trail {
+  opacity: 0.25;
+}
+
+/* ── the widget ─────────────────────────────────────────────── */
+.select {
+  position: relative;
+  display: inline-block;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 11ch;
+  padding: 0.25rem 0.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.26s ease-out;
+}
+
+.button:is(:hover, :focus-visible),
+.select[data-open='true'] .button {
+  background: color-mix(in oklch, var(--foreground) 8%, transparent);
+  outline: none;
+}
+
+.value {
+  flex: 1;
+  text-align: left;
+  color: var(--neon);
+  text-shadow: 0 0 0.6rem var(--neon-faint);
+  white-space: nowrap;
+}
+
+/* ── animated chevron ───────────────────────────────────────── */
+.chevron {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-out;
+}
+
+.select:is(:hover, :focus-within) .chevron,
+.select[data-open='true'] .chevron {
+  opacity: 1;
+}
+
+.chevron path {
+  transition-property: translate, rotate, d;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+
+.cTopLeft {
+  transform-origin: 0 0;
+}
+
+.cBottomRight {
+  transform-origin: 0 100%;
+}
+
+/* closed -> open : chevron-down morphs into an expand/arrows-out glyph */
+.select[data-open='true'] .cTop {
+  d: path('M4 12L12 4');
+}
+
+.select[data-open='true'] .cTopLeft {
+  d: path('M21.8984 13.8984L11.9989 3.99894');
+  rotate: -45deg;
+  translate: -8px 8px;
+}
+
+.select[data-open='true'] .cBottom {
+  d: path('M4 12L12 20');
+}
+
+.select[data-open='true'] .cBottomRight {
+  d: path('M21.8984 10L11.9989 19.8995');
+  rotate: 45deg;
+  translate: -8px -8px;
+}
+
+/* ── the picker overlay ─────────────────────────────────────── */
+.picker {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: 0 -50%;
+  width: max-content;
+  min-width: 100%;
+  height: calc(var(--rows) * var(--row));
+  border-radius: 0.75rem;
+  z-index: 30;
+  /* fade the top & bottom edges of the list */
+  -webkit-mask: linear-gradient(#0000, #fff 2rem calc(100% - 2rem), #0000);
+          mask: linear-gradient(#0000, #fff 2rem calc(100% - 2rem), #0000);
+  transition:
+    opacity 0.3s ease,
+    scale 0.3s ease;
+  transform-origin: center;
+}
+
+.select[data-open='false'] .picker {
+  opacity: 0;
+  scale: 0.96;
+  pointer-events: none;
+}
+
+.select[data-open='true'] .picker {
+  opacity: 1;
+  scale: 1;
+}
+
+.scroller {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-snap-type: y mandatory;
+  padding-block: calc(((var(--rows) - 1) / 2) * var(--row));
+  margin: 0;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  height: var(--row);
+  padding-inline: 0.75rem;
+  scroll-snap-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--foreground);
+  /* --d = distance from the centre in rows, set from JS */
+  --d: 3;
+  opacity: calc(1 - min(var(--d), 3) * 0.27);
+  filter: blur(calc(min(var(--d), 3) * 1.4px));
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
+}
+
+.option[aria-selected='true'] {
+  color: var(--neon);
+  text-shadow: 0 0 0.7rem var(--neon-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .picker,
+  .chevron,
+  .chevron path,
+  .option,
+  .lead,
+  .trail,
+  .button {
+    transition: none;
+  }
+  .scroller {
+    scroll-behavior: auto;
+  }
+}

@@ -104,6 +104,16 @@ export const navSections: NavSection[] = [
       { title: "CSS Gap Line Decoration", href: "/components/css-gap-rules/line-decoration" },
     ],
   },
+  {
+    title: "CwS 7.0 Forms",
+    version: "CwS 7.0",
+    slug: "cws-7",
+    description:
+      "Expressive form controls — styleable selects and pickers built with modern CSS and a light touch of vanilla JS.",
+    items: [
+      { title: "Customizable Select", href: "/components/custom-select" },
+    ],
+  },
 ]
 
 /** Flat, ordered list of all pages — used for prev/next links. */

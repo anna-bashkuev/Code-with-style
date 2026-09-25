@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/page-header"
 import { PageNav } from "@/components/page-nav"
 import { PageShell } from "@/components/page-shell"
 import { ComponentPreview } from "@/components/component-preview"
-import { GsapInfiniteCards } from "@/components/gsap-infinite-cards"
+import { InfiniteCards } from "@/components/infinite-cards"
 import styles from "@/components/scroll-snap-demo.module.css"
 
 export const metadata: Metadata = {
@@ -144,32 +144,38 @@ const panels = [
   },
 ]
 
-const infiniteCardsCode = `gsap.registerPlugin(ScrollTrigger);
+const infiniteCardsCss = `/* The track does the snapping, momentum + easing — no library */
+.track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: calc(50% - 5.5rem); /* room to center the ends */
+}
 
-const spacing = 0.1,
-  snap = gsap.utils.snap(spacing),
-  cards = gsap.utils.toArray('.cards li'),
-  seamlessLoop = buildSeamlessLoop(cards, spacing),
-  scrub = gsap.to(seamlessLoop, {
-    totalTime: 0, duration: 0.5, ease: "power3", paused: true
-  }),
-  trigger = ScrollTrigger.create({
-    start: 0, end: "+=3000", pin: ".gallery",
-    onUpdate(self) {
-      if (self.progress === 1 && self.direction > 0 && !self.wrapping) {
-        wrapForward(self);
-      } else if (self.progress < 1e-5 && self.direction < 0 && !self.wrapping) {
-        wrapBackward(self);
-      } else {
-        scrub.vars.totalTime = snap((iteration + self.progress) * seamlessLoop.duration());
-        scrub.invalidate().restart();
-        self.wrapping = false;
-      }
-    }
-  });
+.card {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  flex: 0 0 11rem;
+  /* JS sets --scale / --active from distance to the center */
+  transform: scale(var(--scale, 0.7));
+  transition: transform 0.1s linear;
+}`
 
-// Each card fades/scales in, then travels across the stage. Extra copies at
-// the ends make the wrap from last to first (and back) completely seamless.`
+const infiniteCardsHtml = `<!-- Render one set of cards. The JS clones this set 3x at runtime
+     so there are always neighbours to scroll into on both sides. -->
+<ul class="track">
+  <li class="card"><span class="num">01</span><span class="label">snap</span></li>
+  <li class="card"><span class="num">02</span><span class="label">loop</span></li>
+  <li class="card"><span class="num">03</span><span class="label">center</span></li>
+  <li class="card"><span class="num">04</span><span class="label">scrub</span></li>
+  <li class="card"><span class="num">05</span><span class="label">wrap</span></li>
+</ul>
+
+<div class="actions">
+  <button type="button" data-dir="prev">Prev</button>
+  <button type="button" data-dir="next">Next</button>
+</div>`
 
 export default function ScrollSnapPage() {
   return (
@@ -260,11 +266,12 @@ export default function ScrollSnapPage() {
         </ComponentPreview>
 
         <ComponentPreview
-          title="Infinite cards with GSAP (continuous snap)"
-          description="Snapping doesn't have to be CSS-only. This GreenSock port scrubs a seamless, looping card animation from the scroll position — scroll inside the frame or use Prev/Next. It snaps to one card at a time, then wraps endlessly in both directions."
-          code={infiniteCardsCode}
+          title="Infinite cards (scroll-snap + vanilla JS)"
+          description="No animation library — CSS scroll-snap handles the snapping, momentum, and easing. A little vanilla JS makes the loop seamless (jump by one set at the clones) and scales the centered card. Scroll sideways or use Prev/Next; it wraps endlessly in both directions."
+          html={infiniteCardsHtml}
+          css={infiniteCardsCss}
         >
-          <GsapInfiniteCards />
+          <InfiniteCards />
         </ComponentPreview>
       </div>
 
