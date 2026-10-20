@@ -1,0 +1,296 @@
+/* ---------- shared trigger ---------- */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--background);
+  color: var(--foreground);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.trigger:hover {
+  background: var(--muted);
+}
+.trigger:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.triggerPrimary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+.triggerPrimary:hover {
+  background: color-mix(in oklch, var(--primary) 88%, black);
+}
+
+/* ---------- shared popover surface ---------- */
+.surface {
+  margin: 0;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: 0 12px 32px -12px color-mix(in oklch, var(--foreground) 30%, transparent);
+}
+
+/* ---------- 1. auto popover menu (anchored to its invoker) ---------- */
+.menu {
+  min-width: 13rem;
+  /* fallback: browsers without anchor positioning centre it in the viewport */
+  margin: auto;
+}
+
+@supports (position-area: bottom) {
+  .menu,
+  .submenu {
+    inset: auto;
+    margin: 0.4rem 0;
+    position-area: bottom span-right;
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+  .submenu {
+    margin: 0 0.4rem;
+    position-area: right span-bottom;
+    position-try-fallbacks: flip-inline, flip-block;
+  }
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menuItem {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.menuItem:hover,
+.menuItem:focus-visible {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  outline: none;
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.separator {
+  height: 1px;
+  margin: 0.35rem 0.25rem;
+  background: var(--border);
+}
+
+/* ---------- 2. manual popover: toast ---------- */
+.toast {
+  inset: auto 1.25rem 1.25rem auto;
+  width: min(22rem, calc(100vw - 2.5rem));
+  padding: 1rem 1.1rem;
+  display: none;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.toast:popover-open {
+  display: flex;
+}
+
+.toastDot {
+  flex: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-top: 0.45rem;
+  border-radius: 999px;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in oklch, var(--primary) 22%, transparent);
+}
+
+.toastBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.toastTitle {
+  font-weight: 600;
+}
+
+.toastText {
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.iconButton {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+.iconButton:hover {
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+/* ---------- 3. animated popover with backdrop ---------- */
+.sheet {
+  width: min(28rem, calc(100vw - 2rem));
+  margin: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  /* exit state */
+  opacity: 0;
+  translate: 0 1rem;
+  scale: 0.96;
+  transition:
+    opacity 0.3s ease,
+    translate 0.3s ease,
+    scale 0.3s ease,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+.sheet:not(:popover-open) {
+  display: none;
+}
+.sheet:popover-open {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+}
+@starting-style {
+  .sheet:popover-open {
+    opacity: 0;
+    translate: 0 1rem;
+    scale: 0.96;
+  }
+}
+
+.sheet::backdrop {
+  background: color-mix(in oklch, var(--foreground) 0%, transparent);
+  backdrop-filter: blur(0);
+  transition:
+    background 0.3s ease,
+    backdrop-filter 0.3s ease,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+.sheet:popover-open::backdrop {
+  background: color-mix(in oklch, var(--foreground) 35%, transparent);
+  backdrop-filter: blur(3px);
+}
+@starting-style {
+  .sheet:popover-open::backdrop {
+    background: color-mix(in oklch, var(--foreground) 0%, transparent);
+    backdrop-filter: blur(0);
+  }
+}
+
+.sheetHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sheetTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.sheetText {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+.sheetActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .sheet::backdrop {
+    transition-duration: 0s;
+  }
+}
+
+/* ---------- 4. hint tooltip ---------- */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.tip {
+  max-width: 16rem;
+  padding: 0.45rem 0.7rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin: auto;
+}
+
+@supports (position-area: top) {
+  .tip {
+    inset: auto;
+    margin: 0 0 0.5rem;
+    position-area: top;
+    position-try-fallbacks: flip-block;
+  }
+}
+
+.note {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  text-align: center;
+  max-width: 32rem;
+  line-height: 1.5;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.3rem;
+  background: var(--muted);
+  color: var(--foreground);
+}
