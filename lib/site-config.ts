@@ -55,6 +55,7 @@ export const navSections: NavSection[] = [
       "The native Popover API brings top-layer overlays, badges, and hints without a line of JavaScript.",
     items: [
       { title: "Example", href: "/components/badges" },
+      { title: "Popover API", href: "/components/popover", label: "New" },
     ],
   },
   {
