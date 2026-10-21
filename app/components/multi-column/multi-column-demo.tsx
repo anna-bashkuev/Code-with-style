@@ -53,7 +53,33 @@ export function MultiColumnCardsDemo() {
         title="Column-wrapped cards"
         description="New multi-column layout with wrap behavior."
         className="justify-center"
-        code={`<div className="multi-column">`}
+        html={`<div class="preview">
+  <div class="article">
+    <p>CSS Multi-column layout has been part of the spec for years…</p>
+    <p>This created a jarring horizontal scrollbar…</p>
+    <p>Chrome 145 changes this with two new properties…</p>
+    <p>The column-height property sets an explicit height…</p>
+    <p>This makes multi-column genuinely useful…</p>
+  </div>
+</div>`}
+        css={`.preview {
+  overflow-x: ${ex1Wrap === "wrap" ? "hidden" : "auto"};
+  overflow-y: ${ex1Wrap === "wrap" ? "auto" : "hidden"};
+}
+
+.article {
+  column-count: ${ex1Cols};
+  column-gap: 1.25rem;
+  column-rule: 1px solid #252525;
+  column-height: ${ex1Height}px; /* new in Chrome 145 */
+  column-wrap: ${ex1Wrap}; /* new in Chrome 145 */
+}
+
+.article p {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  margin-bottom: 0.75rem;
+}`}
       >
         <div className="section-label">
           <h2>01 — Article Layout (Long-form Text)</h2>
@@ -159,7 +185,61 @@ export function MultiColumnCardsDemo() {
         title="Column-wrapped cards"
         description="Column breaks to cards."
         className="justify-center"
-        code={`<div className="multi-column">`}
+        html={`<div class="preview">
+  <div class="card-grid">
+    <div class="card">
+      <h3>Subgrid</h3>
+      <p>Children of grid items align to the parent grid's tracks.</p>
+      <span class="tag">Baseline 2023</span>
+    </div>
+    <div class="card">
+      <h3>Container Queries</h3>
+      <p>Style elements based on their container size.</p>
+      <span class="tag">Baseline</span>
+    </div>
+    <!-- …more cards -->
+  </div>
+</div>`}
+        css={`.preview {
+  overflow-x: ${ex2Wrap === "wrap" ? "hidden" : "auto"};
+  overflow-y: ${ex2Wrap === "wrap" ? "auto" : "hidden"};
+}
+
+.card-grid {
+  column-count: 3;
+  column-gap: 1rem;
+  column-height: ${ex2Height}px; /* new in Chrome 145 */
+  column-wrap: ${ex2Wrap}; /* new in Chrome 145 */
+}
+
+.card {
+  break-inside: avoid; /* keep cards in one column */
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.card p {
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.card .tag {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  padding: 0.15em 0.6em;
+  border-radius: 3px;
+  font-weight: 700;
+}`}
       >
         <section>
           <div className="section-label">

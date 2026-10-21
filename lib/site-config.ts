@@ -66,6 +66,7 @@ export const navSections: NavSection[] = [
       "Performance-minded CSS — from calc-size() transitions to content-visibility — that keeps interfaces fast.",
     items: [
       { title: "Example", href: "/components/calc-size" },
+      { title: "CSS Containment Examples", href: "/components/css-containment", label: "New" },
     ],
   },
   {
