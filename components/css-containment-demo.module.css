@@ -1,0 +1,619 @@
+/* ---------- shared ---------- */
+.stage {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--background);
+  color: var(--foreground);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.trigger:hover {
+  background: var(--muted);
+}
+.trigger:focus-visible,
+.iconButton:focus-visible,
+.listButton:focus-visible,
+.tab:focus-visible,
+.sortButton:focus-visible,
+.search:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.triggerPrimary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+.triggerPrimary:hover {
+  background: color-mix(in oklch, var(--primary) 88%, black);
+}
+
+.iconButton {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.surface {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card);
+  color: var(--card-foreground);
+}
+
+.floating {
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: 0 12px 32px -12px color-mix(in oklch, var(--foreground) 30%, transparent);
+}
+
+.meta {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.stat {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--foreground);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.375rem;
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--foreground);
+}
+
+.title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ---------- 1. sidebar ---------- */
+.sidebarLayout {
+  display: flex;
+  width: 100%;
+  min-height: 16rem;
+  overflow: hidden;
+}
+
+.sidebar {
+  contain: layout paint style;
+  display: flex;
+  flex: 0 0 12rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  border-right: 1px solid var(--border);
+  background: var(--muted);
+  transition: flex-basis 0.25s ease;
+}
+.sidebar[data-collapsed="true"] {
+  flex-basis: 3.5rem;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+.sidebar[data-collapsed="true"] .sidebarLabel {
+  display: none;
+}
+
+.sidebarContent {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+/* ---------- 2. popup ---------- */
+.popupAnchor {
+  position: relative;
+  display: inline-block;
+}
+
+.popup {
+  contain: layout paint;
+  isolation: isolate;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  z-index: 10;
+  display: flex;
+  width: min(17rem, 80vw);
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+/* ---------- 3. flyout ---------- */
+.flyoutWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.flyoutList,
+.flyoutNested {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0.375rem;
+  list-style: none;
+}
+.flyoutList {
+  width: 12rem;
+}
+
+.listButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.65rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+.listButton:hover,
+.listButton[aria-expanded="true"] {
+  background: var(--muted);
+}
+
+.flyout {
+  contain: layout paint;
+  width: 13rem;
+  padding: 0.375rem;
+}
+
+.flyoutGroup {
+  padding: 0.4rem 0.65rem 0.2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted-foreground);
+}
+.flyoutNested {
+  padding: 0 0 0.25rem 0.5rem;
+}
+
+/* ---------- 4. virtual list ---------- */
+.virtualViewport {
+  contain: strict;
+  width: 100%;
+  height: 20rem;
+  overflow-y: auto;
+}
+
+.virtualRow {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 40px;
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+
+/* ---------- 5. widgets ---------- */
+.widgetGrid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.75rem;
+}
+
+.widget {
+  contain: layout style paint;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem;
+}
+.widget[data-live="true"] {
+  border-color: var(--primary);
+}
+
+.widgetValue {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.bars {
+  display: flex;
+  height: 2.5rem;
+  align-items: flex-end;
+  gap: 3px;
+}
+.bars span {
+  flex: 1;
+  border-radius: 2px;
+  background: var(--primary);
+}
+
+/* ---------- 6. nested grid in flex ---------- */
+.nestedFlex {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.nestedAside {
+  flex: 0 0 9rem;
+  padding: 1rem;
+}
+
+.nestedMain {
+  display: flex;
+  min-width: 14rem;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.innerGrid {
+  contain: layout;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: 0.5rem;
+}
+
+.tile {
+  display: grid;
+  min-height: 3.5rem;
+  place-items: center;
+  border-radius: 0.5rem;
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+/* ---------- 7. sticky + fixed ---------- */
+.splitGrid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.scrollBox {
+  height: 14rem;
+  overflow-y: auto;
+}
+
+.stickyParent {
+  contain: layout;
+}
+
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.scrollBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.paintParent {
+  contain: paint;
+}
+
+.fixedBadge {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid color-mix(in oklch, var(--destructive) 45%, transparent);
+  border-radius: 0.6rem;
+  background: color-mix(in oklch, var(--destructive) 8%, transparent);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.warning svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--destructive);
+}
+
+/* ---------- 8. animation ---------- */
+.animStage {
+  display: flex;
+  min-height: 9rem;
+  align-items: center;
+}
+
+.animCard {
+  contain: layout paint;
+  display: flex;
+  width: min(18rem, 100%);
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+}
+.animCard[data-state="hidden"] {
+  transform: translateX(3rem) scale(0.85);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animCard {
+    transition: none;
+  }
+}
+
+/* ---------- 9. filter ---------- */
+.search {
+  width: 100%;
+  max-width: 22rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--input);
+  border-radius: 0.6rem;
+  background: var(--background);
+  color: var(--foreground);
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.filterList {
+  contain: paint;
+  display: flex;
+  max-height: 16rem;
+  flex-direction: column;
+  margin: 0;
+  padding: 0.375rem;
+  overflow-y: auto;
+  list-style: none;
+}
+.filterList li {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.875rem;
+}
+.filterList li:nth-child(odd) {
+  background: var(--muted);
+}
+
+/* ---------- 10. data table ---------- */
+.tableWrap {
+  contain: layout style;
+  width: 100%;
+  height: 20rem;
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  text-align: left;
+}
+
+.tableBody {
+  contain: content;
+}
+
+.table td {
+  padding: 0.5rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+
+.sortButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 0.9rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ---------- 11. fixed-size strict ---------- */
+.strictRow {
+  display: flex;
+  min-height: 13rem;
+  align-items: flex-start;
+  padding: 0.25rem;
+  outline: 1px dashed var(--border);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+.strictBox {
+  contain: strict;
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  padding: 1rem;
+}
+.strictBox[data-sized="false"] {
+  width: auto;
+  height: auto;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+}
+.chart li {
+  display: grid;
+  grid-template-columns: 3rem 1fr 2.5rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+.chartBar {
+  height: 0.6rem;
+  border-radius: 999px;
+  background: var(--primary);
+}
+
+/* ---------- 12. tabs ---------- */
+.tabList {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 0.65rem;
+  background: var(--muted);
+  width: fit-content;
+}
+
+.tab {
+  padding: 0.45rem 0.9rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--muted-foreground);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.tab[aria-selected="true"] {
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 1px 2px color-mix(in oklch, var(--foreground) 15%, transparent);
+}
+
+.tabPanel {
+  contain: content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+.tabPanel[hidden] {
+  display: none;
+}
+
+/* ---------- 13. dialog ---------- */
+.dialog {
+  contain: layout paint;
+  isolation: isolate;
+  width: min(26rem, calc(100vw - 2rem));
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: var(--popover);
+  color: var(--popover-foreground);
+}
+.dialog::backdrop {
+  background: color-mix(in oklch, var(--foreground) 35%, transparent);
+}
+
+.dialogBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
